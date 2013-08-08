@@ -1,0 +1,60 @@
+/**
+ * @file main.scss
+ * This file imports all other stylesheets used in the app.
+ */
+
+// Make sure the charset is set appropriately
+@charset "UTF-8";
+
+// Normalize the user agent styles
+@import '../js/libs/foundation/scss/normalize';
+
+// Import global foundation variables. We will get a chance to override these.
+@import '../js/libs/foundation/scss/foundation/variables';
+
+// This includes all of the foundation global elements that are used
+// in many of the foundation components. These will override the global
+// variables imported in the statement above this one.
+// ** If a variable exists, use it.
+@import "foundation-variables";
+
+// Import only the foundation components we use
+@import
+  '../js/libs/foundation/scss/foundation/components/global',
+  '../js/libs/foundation/scss/foundation/components/grid',
+  '../js/libs/foundation/scss/foundation/components/visibility',
+  '../js/libs/foundation/scss/foundation/components/block-grid',
+  '../js/libs/foundation/scss/foundation/components/type';
+  // '../js/libs/foundation/scss/foundation/components/buttons',
+  // '../js/libs/foundation/scss/foundation/components/forms',
+  // '../js/libs/foundation/scss/foundation/components/button-groups',
+  // '../js/libs/foundation/scss/foundation/components/dropdown-buttons',
+  // '../js/libs/foundation/scss/foundation/components/split-buttons',
+  // '../js/libs/foundation/scss/foundation/components/flex-video',
+  // '../js/libs/foundation/scss/foundation/components/section',
+  // '../js/libs/foundation/scss/foundation/components/top-bar',
+  // '../js/libs/foundation/scss/foundation/components/orbit',
+  // '../js/libs/foundation/scss/foundation/components/reveal',
+  // '../js/libs/foundation/scss/foundation/components/joyride',
+  // '../js/libs/foundation/scss/foundation/components/clearing',
+  // '../js/libs/foundation/scss/foundation/components/alert-boxes',
+  // '../js/libs/foundation/scss/foundation/components/breadcrumbs',
+  // '../js/libs/foundation/scss/foundation/components/custom-forms',
+  // '../js/libs/foundation/scss/foundation/components/keystrokes',
+  // '../js/libs/foundation/scss/foundation/components/labels',
+  // '../js/libs/foundation/scss/foundation/components/inline-lists',
+  // '../js/libs/foundation/scss/foundation/components/pagination',
+  // '../js/libs/foundation/scss/foundation/components/panels',
+  // '../js/libs/foundation/scss/foundation/components/pricing-tables',
+  // '../js/libs/foundation/scss/foundation/components/progress-bars',
+  // '../js/libs/foundation/scss/foundation/components/side-nav',
+  // '../js/libs/foundation/scss/foundation/components/sub-nav',
+  // '../js/libs/foundation/scss/foundation/components/switch',
+  // '../js/libs/foundation/scss/foundation/components/magellan',
+  // '../js/libs/foundation/scss/foundation/components/tables',
+  // '../js/libs/foundation/scss/foundation/components/thumbs',
+  // '../js/libs/foundation/scss/foundation/components/tooltips',
+  // '../js/libs/foundation/scss/foundation/components/dropdown',
+
+// Import the CSS for all views on the system
+@import 'views/all';
