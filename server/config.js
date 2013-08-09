@@ -6,8 +6,9 @@
  */
 
 module.exports = {
-  apiRoot     : '/',
-  endpoint    : 'v1',
-  host        : '127.0.0.1',
-  port        : 3000
+  apiRoot : '/',
+  version : 'v1',
+  host : '127.0.0.1',
+  port : 3000,
+  corsOptions : {} // access to all origins (not safe for production)
 };
