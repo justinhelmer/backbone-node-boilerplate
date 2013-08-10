@@ -10,7 +10,8 @@
 
   module.exports = {
     options: {
-      baseUrl: '<%= client.scriptPath %>',
+      appDir: '<%= client.rootPath %>',
+      baseUrl: './js',
       name: 'main',
       mainConfigFile: '<%= client.scriptPath %>/main.js',
       skipDirOptimize: true

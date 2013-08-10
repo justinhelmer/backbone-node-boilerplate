@@ -2,7 +2,7 @@
   'use strict';
 
   module.exports = function(grunt) {
-    var config = require('./grunt_config/config.js');
+    var config = require('./grunt-config.js');
 
     // initialize project configuration with path variable for use elsewhere
     grunt.initConfig(config);
@@ -80,9 +80,9 @@
 
     // Register custom dist build task
     grunt.registerTask('build:dist', 'Run dist build process', [
-      'clean:buildPrepare:dev',
-      'handlebars:dist',
+      'clean:buildPrepare',
       'sass-directory-imports',
+      'handlebars:dist',
       'requirejs:dist',
       'compass:dist',
       'clean:dist'

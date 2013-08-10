@@ -28,8 +28,9 @@
     ],
 
     // uglify2 breaks on the requirejs/tests/browsertests/onerror/parseError.js
-    buildPrepare: {
-      dist: ['build/dist', '<%= client.libraryPath %>/requirejs/tests']
-    }
+    buildPrepare: [
+      '<%= buildPaths.dist %>/*',
+      '<%= client.libraryPath %>/requirejs/tests/*'
+    ]
   };
 }());

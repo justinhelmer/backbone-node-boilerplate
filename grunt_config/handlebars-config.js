@@ -8,7 +8,7 @@
 (function () {
   'use strict';
 
-  var config = require('../grunt_config/config');
+  var config = require('../grunt-config');
   var StringFunctions = require('.' + config.client.scriptPath + '/utils/stringFunctions');
 
   module.exports = {

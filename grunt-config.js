@@ -26,7 +26,7 @@
     },
     buildPaths: {
       dev           : clientPath + '/build/dev',
-      dist          : clientPath + '/client/build/dist'
+      dist          : clientPath + '/build/dist'
     },
     configPath      : './grunt_config',
     tasksPath       : './grunt_tasks'
