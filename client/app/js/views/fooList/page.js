@@ -11,6 +11,8 @@ define([
   'views/page',
   'models/foo'
 ], function(Backbone, config, PageView, FooModel) {
+  'use strict';
+
   var FooListPageView = PageView.extend({
     model: 'Foo',
     template: 'FooListPageView',

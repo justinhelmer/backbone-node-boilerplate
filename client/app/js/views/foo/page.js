@@ -9,6 +9,8 @@ define([
   'views/page',
   'models/foo'
 ], function(PageView, FooModel) {
+  'use strict';
+
   var FooPageView = PageView.extend({
     template: 'FooPageView',
 

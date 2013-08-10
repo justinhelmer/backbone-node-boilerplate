@@ -8,6 +8,8 @@
 define([
   'views/page'
 ], function(PageView) {
+  'use strict';
+
   var DashboardPageView = PageView.extend({
     template: 'DashboardPageView',
 

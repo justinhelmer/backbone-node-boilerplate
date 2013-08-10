@@ -5,19 +5,22 @@
  * @author Justin Helmer 8/5/2013
  */
 
-module.exports = {
-  options: {
-    appDir: '<%= applicationFolder %>',
-    baseUrl: '<%= scriptFolder %>', // relative to appDir
-    name: 'main',
-    mainConfigFile: '<%= scriptPath %>/main.js',
-    skipDirOptimize: true
-  },
-  dist: {
+(function () {
+  'use strict';
+
+  module.exports = {
     options: {
-      dir: '<%= buildPaths.dist %>',
-      optimize: 'uglify2',
-      optimizeCss: 'none'
+      baseUrl: '<%= client.scriptPath %>',
+      name: 'main',
+      mainConfigFile: '<%= client.scriptPath %>/main.js',
+      skipDirOptimize: true
+    },
+    dist: {
+      options: {
+        dir: '<%= buildPaths.dist %>',
+        optimize: 'uglify2',
+        optimizeCss: 'none'
+      }
     }
-  }
-};
+  };
+}());

@@ -8,6 +8,8 @@
 define([
   'backbone'
 ], function(Backbone) {
+  'use strict';
+
   // Set up a Router object that contains the route information
   var Router = Backbone.Router.extend({
     routes: {

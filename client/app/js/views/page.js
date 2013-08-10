@@ -8,6 +8,8 @@
 define([
   'views/base'
 ], function(BaseView) {
+  'use strict';
+
   var PageView = BaseView.extend({
     el: '#main'
   });

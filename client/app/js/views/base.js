@@ -10,8 +10,13 @@ define([
   'lodash',
   'jst'
 ], function(Backbone, _, JST) {
+  'use strict';
+
   var BaseView = Backbone.View.extend({
     hbars: function () {
+      var data,
+          extra;
+
       if (_.isString(arguments[0])) {
         // Function was called in the format of hbars(template, data, extra)
         data = arguments[1] || {};

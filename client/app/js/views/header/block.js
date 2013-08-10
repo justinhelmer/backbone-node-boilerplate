@@ -8,6 +8,8 @@
 define([
   'views/block'
 ], function(BlockView) {
+  'use strict';
+
   var HeaderBlockView = BlockView.extend({
     el: '#header',
     template: 'HeaderBlockView',

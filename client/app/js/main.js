@@ -33,6 +33,8 @@ require([
   'views/layout',
   'router'
 ], function (LayoutView, Router) {
+  'use strict';
+
   // Initialize and render the application container
   new LayoutView();
 

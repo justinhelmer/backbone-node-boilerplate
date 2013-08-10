@@ -10,6 +10,8 @@ define([
   'views/header/block',
   'views/footer/block'
 ], function(BaseView, HeaderBlockView, FooterBlockView) {
+  'use strict';
+
   var LayoutView = BaseView.extend({
     el: '#container',
     template: 'LayoutView',

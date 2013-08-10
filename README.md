@@ -28,18 +28,41 @@ From the root of your working copy (the repository clone), run the following com
 
 ```shell
 $> cd client
+$> chmod +x ./setup.sh
 $> ./setup.sh
 ```
 
 This will install the necessary requirements for your system.
 
-Next, open the file located at `client/app/js/config.js`, and set the correct API url for your environment, i.e.:
+Next, open the file located at `server/config.js`, and set the configuration options you would like to launch your node server with, i.e.:
 
 ```js
 /**
- * @file
- * client/app/js/config.js
+ * @file config.js
+ * Define global server-side configuration
  */
+
+(function () {
+  'use strict';
+
+  module.exports = {
+    apiRoot : '/',
+    version : 'v1',
+    host : '127.0.0.1',
+    port : 3000,
+    corsOptions : {} // access to all origins (not safe for production)
+  };
+}());
+```
+
+Finally, open the file located at `client/app/js/config.js`, and make sure the API url for your environment corresponds with the server configuration you just set up for node, i.e.:
+
+```js
+/**
+ * @file config.js
+ * Define global client-side configuration
+ */
+
 define({
   api: {
     url: 'http://api.backbone.ops.com:3000/v1/'
@@ -72,16 +95,6 @@ $> grunt build:dist
 From here, set up a virtual host entry to point to the particular build of choice:
 
 `client/build/dev`, or `client/build/dist` (or both).
-
-** IMPORTANT: API requests on a different domain or port (inevitable with node) have to deal with [Same origin policy](http://en.wikipedia.org/wiki/Same_origin_policy)
-
-There is no solution built into this application. I just launch chrome with the flag:
-
-```shell
---disable-web-security
-```
-
-Doing this, I am able to make XMLHttpRequests OK.
 
 ## Grunt Tips
 
@@ -120,9 +133,12 @@ options: {
   eqeqeq: true,
   indent: 2,
   newcap: true,
-  quotmark: 'single'
+  quotmark: 'single',
+  strict: true
 },
 ```
+
+*NOTE that all custom javascript must adhere to EMCAScript 5's [Strict mode](https://developer.mozilla.org/en/JavaScript/Strict_mode).
 
 ## Server Technologies
 - [Node](http://nodejs.org/api/)

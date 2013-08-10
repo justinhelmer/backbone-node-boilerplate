@@ -8,6 +8,8 @@
 define([
   'views/base'
 ], function(BaseView) {
+  'use strict';
+
   var BlockView = BaseView.extend({
     className: 'block'
   });
