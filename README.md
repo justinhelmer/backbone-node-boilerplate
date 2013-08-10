@@ -9,7 +9,7 @@ Pull requests are encouraged
 
 ## Getting Started
 - Install [Node](http://nodejs.org/)
-- Ensure it is in your PATH, and you have version 0.10.x:
+- Ensure it is in your PATH, and you have version 0.10.x. It may work for other versions, but this app was built originally built on:
 
 ```shell
 $> node -v
@@ -17,7 +17,7 @@ v0.10.15
 ```
 
 - Install [Ruby](http://www.ruby-lang.org/en/) (Should already be installed on OSX)
-- Ensure it is in your PATH, and you have version 2.0.x:
+- Ensure it is in your PATH, and you have version 2.0.x. It may work for other versions, but this app was built originally built on:
 
 ```shell
 $> ruby -v
@@ -27,8 +27,6 @@ ruby 2.0.0p247 (2013-06-27)
 From the root of your working copy (the repository clone), run the following commands:
 
 ```shell
-$> cd client
-$> chmod +x ./setup.sh
 $> ./setup.sh
 ```
 
@@ -65,6 +63,7 @@ Finally, open the file located at `client/app/js/config.js`, and make sure the A
 
 define({
   api: {
+    // HOSTS entries point *.backbone.ops.com to 127.0.0.1
     url: 'http://api.backbone.ops.com:3000/v1/'
   }
 });

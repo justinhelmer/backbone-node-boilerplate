@@ -1,0 +1,21 @@
+{
+  "name": "backbone-node-boilerplate",
+  "description": "A boilerplate with a backbone client and node server",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Justin Helmer <jhelmer25@gmail.com>",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-contrib-handlebars": "~0.5.10",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-compass": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.2",
+    "express": "~3.3.4",
+    "underscore": "~1.5.1",
+    "cors": "~1.0.1",
+    "requirejs": "~2.1.8"
+  }
+}

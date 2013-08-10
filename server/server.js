@@ -23,7 +23,7 @@
 
   // Needed to resolve client grunt server task paths.
   // @TODO is there a better way to handle path resolution?
-  var prefix = '../server/';
+  var prefix = './server/';
 
   // Require API resources used by the node server
   // load all modules that exists in the correct API folder
@@ -31,9 +31,8 @@
   // @see http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http
   var directory = prefix + 'resources/' + config.version;
   fs.readdirSync(directory).forEach(function (filename) {
-
     // Initialize the particular resource
-    var resource = require(directory + '/' + filename);
+    var resource = require('./resources/v1/' + filename);
 
     // Generate an array of paths used for API calls
     var paths = {
