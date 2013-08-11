@@ -9,9 +9,22 @@
   'use strict';
 
   module.exports = {
-    server: {
-      files: ['server.js'],
-      tasks: ['server']
+    dev: {
+      files: [
+        '<%= client.rootPath %>/*.html',
+        '<%= client.rootPath %>/templates/*.html',
+        '<%= client.rootPath %>/templates/**/*.html',
+        '<%= client.scriptPath %>/*.js',
+        '<%= client.scriptPath %>/models/*.js',
+        '<%= client.scriptPath %>/views/*.js',
+        '<%= client.scriptPath %>/views/**/*.js',
+        '<%= client.scriptPath %>/collections/*.js',
+        '<%= client.scriptPath %>/utils/*.js',
+        '<%= client.cssPath %>/*.scss',
+        '!<%= client.cssPath %>/*_all.scss',
+        '<%= client.cssPath %>/views/*.scss'
+      ],
+      tasks: ['prepareBuild:dev']
     }
   };
 }());

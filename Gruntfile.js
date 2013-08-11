@@ -48,6 +48,16 @@
         type   : 'node'
       },
       {
+        config : 'concurrent',
+        module : 'grunt-concurrent',
+        type   : 'node'
+      },
+      {
+        config : 'nodemon',
+        module : 'grunt-nodemon',
+        type   : 'node'
+      },
+      {
         config : 'sass-directory-imports',
         module : 'sass-directory-imports',
         type   : 'other'
@@ -68,14 +78,9 @@
     grunt.loadTasks(config.tasksPath);
 
     // Register custom dev build task
-    grunt.registerTask('build:dev', 'Run dev build process', [
-      'jshint:dev',
-      'sass-directory-imports',
-      'handlebars:dist', // App currently doesn't work unless templates are already compiled.
-      'copy:dev',
-      'compass:dev',
-      'clean:dev',
-      'server'
+    grunt.registerTask('build:dev', 'Run dev build process and launch node server', [
+      'prepareBuild:dev',
+      'concurrent:dev'
     ]);
 
     // Register custom dist build task
@@ -88,11 +93,15 @@
       'clean:dist'
     ]);
 
-    // Register custom server task to start the node server
-    grunt.registerTask('server', 'Start node server', function () {
-      require(config.server.rootPath + '/server.js');
-      grunt.task.run('watch:server');
-    });
+    // Register custom build task that builds dev without launching server
+    grunt.registerTask('prepareBuild:dev', 'Run dev build process', [
+      'jshint:dev',
+      'sass-directory-imports',
+      'handlebars:dist', // App currently doesn't work unless templates are already compiled.
+      'copy:dev',
+      'compass:dev',
+      'clean:dev'
+    ]);
 
     // Register build task that will run both dev and dist builds
     grunt.registerTask('build', 'build dev and dist', [

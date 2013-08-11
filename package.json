@@ -16,6 +16,7 @@
     "express": "~3.3.4",
     "underscore": "~1.5.1",
     "cors": "~1.0.1",
-    "requirejs": "~2.1.8"
+    "grunt-nodemon": "0.0.10",
+    "grunt-concurrent": "~0.3.0"
   }
 }
