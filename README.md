@@ -27,6 +27,7 @@ ruby 2.0.0p247 (2013-06-27)
 From the root of your working copy (the repository clone), run the following commands:
 
 ```shell
+$> chmod +x setup.sh
 $> ./setup.sh
 ```
 
