@@ -1,28 +1,26 @@
-backbone-node-boilerplate
-=========
+# backbone-node-boilerplate
+> Client and server interaction architecture, with  client built on backbone.js and a server built on node.js
 
 There are many approaches to backbone and node out there, and a number of boilerplates. This one tries to combine the two in a simple and elegant way.
 
-This is very much IN PROGRESS; I would recommend not using it on prodution builds until it gets more solidified.
+This is very much **IN PROGRESS**; I would recommend not using it on prodution builds until it gets more solidified.
 
-Pull requests are encouraged
+Pull requests are encouraged.
+
+## Prerequisites
+1. [npm](https://npmjs.org/), the [Node.js](http://nodejs.org/) package manager.
+   > Ensure it is in your PATH, and you have version 0.10.x. It may work for other versions, but this app was built originally built on:
+
+        $> node -v
+        v0.10.15
+
+2. [Ruby](http://www.ruby-lang.org/en/) (Should already be installed on OSX) - used by [Sass](http://sass-lang.com/)/[Compass](http://compass-style.org/)
+   > Ensure it is in your PATH, and you have version 2.0.x. It may work for other versions, but this app was built originally built on:
+
+        $> ruby -v
+        ruby 2.0.0p247 (2013-06-27)
 
 ## Getting Started
-- Install [Node](http://nodejs.org/)
-- Ensure it is in your PATH, and you have version 0.10.x. It may work for other versions, but this app was built originally built on:
-
-```shell
-$> node -v
-v0.10.15
-```
-
-- Install [Ruby](http://www.ruby-lang.org/en/) (Should already be installed on OSX)
-- Ensure it is in your PATH, and you have version 2.0.x. It may work for other versions, but this app was built originally built on:
-
-```shell
-$> ruby -v
-ruby 2.0.0p247 (2013-06-27)
-```
 
 From the root of your working copy (the repository clone), run the following commands:
 
