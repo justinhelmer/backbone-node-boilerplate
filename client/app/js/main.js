@@ -30,10 +30,19 @@ require.config({
 });
 
 require([
+  'jquery',
   'views/layout',
-  'router'
-], function (LayoutView, Router) {
+  'router',
+  'config'
+], function ($, LayoutView, Router, config) {
   'use strict';
+
+  // Prepare default AJAX request options
+  $.ajaxSetup({
+    headers: {
+      'Accept': 'application/vnd.jhelmer.backbone-node-boilerplate+json; version=' + config.api.version
+    }
+  });
 
   // Initialize and render the application container
   new LayoutView();

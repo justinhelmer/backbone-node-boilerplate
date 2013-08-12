@@ -7,7 +7,10 @@
 
 define({
   api: {
-    // HOSTS entries point *.backbone.ops.com to 127.0.0.1
-    url: 'http://api.backbone.ops.com:3000/v1/'
+    // HOSTS entries point *.backbone.ops.com to API server IP
+    url: 'http://api.backbone.ops.com:3000/',
+
+    // Use version 1.0 of the API
+    version: '1.0',
   }
 });

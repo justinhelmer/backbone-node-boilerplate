@@ -10,9 +10,11 @@
 
   module.exports = {
     apiRoot : '/',
-    version : 'v1',
     host : '127.0.0.1',
     port : 3000,
-    corsOptions : {} // access to all origins (not safe for production)
+    corsOptions : {}, // access to all origins (not safe for production),
+    contentNegotiation: { // assumes 1<->1 relationship
+      'application/vnd.jhelmer.backbone-node-boilerplate+json': 'json'
+    }
   };
 }());

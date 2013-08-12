@@ -6,26 +6,20 @@
  */
 
 define([
-  'backbone',
-  'config',
-  'views/page',
-  'models/foo'
-], function(Backbone, config, PageView, FooModel) {
+  'collections/fooList',
+  'views/page'
+], function(FooListCollection, PageView) {
   'use strict';
 
   var FooListPageView = PageView.extend({
-    model: 'Foo',
     template: 'FooListPageView',
 
     initialize: function () {
       var _view = this;
 
-      var fooCollection = new Backbone.Collection([], {
-        model: FooModel,
-        url: config.api.url + 'foos',
-      });
+      var fooListCollection = new FooListCollection();
 
-      fooCollection.fetch({
+      fooListCollection.fetch({
         success: function (collection, response, options) {
           _view.render(response);
         }
