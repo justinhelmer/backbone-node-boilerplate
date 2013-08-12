@@ -20,6 +20,8 @@ Pull requests are encouraged.
         $> ruby -v
         ruby 2.0.0p247 (2013-06-27)
 
+> More about [Server Technologies](#server-technolgies) and [Client Technologies](#client-technologies) below.
+
 ## Getting Started
 
 From the root of your working copy (the repository clone), run the following commands:
