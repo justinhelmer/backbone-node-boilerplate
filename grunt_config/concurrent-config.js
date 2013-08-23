@@ -13,10 +13,10 @@
       logConcurrentOutput: true
     },
     dev: {
-      tasks: ['nodemon:dev', 'connect:dev', 'watch:dev']
+      tasks: ['nodemon:server', 'connect:dev', 'watch:dev']
     },
     dist: {
-      tasks: ['nodemon:dev', 'connect:dev']
+      tasks: ['nodemon:server', 'connect:dist', 'watch:dist']
     }
   };
 }());

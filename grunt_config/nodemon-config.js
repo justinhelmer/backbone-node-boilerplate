@@ -9,7 +9,7 @@
   'use strict';
 
   module.exports = {
-    dev: {
+    server: {
       options: {
         file: 'server.js',
         cwd: '<%= server.rootPath %>'

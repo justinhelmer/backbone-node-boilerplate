@@ -24,15 +24,19 @@ Pull requests are encouraged.
 
 ## Getting Started
 
-From the root of your working copy (the repository clone), run the following commands:
+From the root of your working copy (the repository clone), run the following command:
 
+> For OSX / Linux
 ```shell
-$> chmod 755 setup.sh
+$> sudo ./setup.sh
+```
+
+> For Windows, using *nix-style command prompt, e.g. [Git Bash](http://git-scm.com/downloads)
+```shell
 $> ./setup.sh
 ```
 
 This will install the necessary requirements for your system.
-
 
 ## Building the web app
 
@@ -64,12 +68,13 @@ $> grunt
 
 ## Launching the web app
 
-The `build:dev` grunt task additionally triggers `concurrent:dev`, which launches a local web server on port 9001, and a local node server on port 3000.
+The `build:dev` grunt task additionally triggers `server:dev`, which launches a local web server on port 9001, a local node server on port 3000, as well as a [LiveReload](http://livereload.com/) server.
 
-When the local servers are running, open a web browser and visit http://localhost:9001 to view the web app. Requests to the node server are made to http://localhost:3000
-These configuration options can be changed at `client/app/js/config.js` and `server/config.js`.
+When the local servers are running, open a web browser and visit [http://localhost:9001](http://localhost:9001) to view the web app. By default, requests to the node server are made to [http://localhost:3000](http://localhost:3000) - these configuration options can be changed at `client/app/js/config.js` and `server/config.js`.
 
-Additionally, `concurrent:dev` listens for changes to development files, and will re-build application files and re-launch local servers automatically. If you have [LiveReload](http://livereload.com/) installed and running on your system, then the browser will automatically refresh to show the changes on each save.
+Additionally, `server:dev` listens for changes to development files, and will re-build application files and re-launch local livereload, node, and web servers automatically. If you have [LiveReload](http://livereload.com/) installed and running on your system, then the browser will automatically refresh to show the changes on each save.
+
+When `build:dist` is run, the `server:dist` task must be manually triggered to launch local servers to watch dist files. The assumption here is that the `dist` build will not typically be re-build during development.
 
 ## Standards
 - [commonjs module and package systems](http://wiki.commonjs.org/wiki/CommonJS)

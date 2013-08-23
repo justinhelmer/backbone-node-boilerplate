@@ -21,7 +21,6 @@
   // Initialize express server
   var app = express();
 
-
   // Initialize a variable that will store each resource's name,
   // along with the names of any actions, targetedActions, and relationships
   var resources = {};
@@ -154,9 +153,15 @@
     });
   });
 
+  var success = 'API server running at http://' + config.host + ':' + config.port;
+
+  app.get('/', function (req, res) {
+    res.send(success);
+  });
+
   // Start the node server
   app.listen(config.port, config.host);
 
   // Inform user that the server started successfully
-  console.log('Server running at http://' + config.host + ':' + config.port);
+  console.log(success);
 }());

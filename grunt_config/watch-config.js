@@ -8,26 +8,32 @@
 (function () {
   'use strict';
 
+  var files = [
+    '<%= client.rootPath %>/*.html',
+    '<%= client.rootPath %>/templates/*.html',
+    '<%= client.rootPath %>/templates/**/*.html',
+    '<%= client.scriptPath %>/*.js',
+    '<%= client.scriptPath %>/models/*.js',
+    '<%= client.scriptPath %>/views/*.js',
+    '<%= client.scriptPath %>/views/**/*.js',
+    '<%= client.scriptPath %>/collections/*.js',
+    '<%= client.scriptPath %>/utils/*.js',
+    '<%= client.cssPath %>/*.scss',
+    '!<%= client.cssPath %>/*_all.scss',
+    '<%= client.cssPath %>/views/*.scss'
+  ];
+
   module.exports = {
+    options: {
+      livereload: true
+    },
     dev: {
-      files: [
-        '<%= client.rootPath %>/*.html',
-        '<%= client.rootPath %>/templates/*.html',
-        '<%= client.rootPath %>/templates/**/*.html',
-        '<%= client.scriptPath %>/*.js',
-        '<%= client.scriptPath %>/models/*.js',
-        '<%= client.scriptPath %>/views/*.js',
-        '<%= client.scriptPath %>/views/**/*.js',
-        '<%= client.scriptPath %>/collections/*.js',
-        '<%= client.scriptPath %>/utils/*.js',
-        '<%= client.cssPath %>/*.scss',
-        '!<%= client.cssPath %>/*_all.scss',
-        '<%= client.cssPath %>/views/*.scss'
-      ],
-      tasks: ['prepareBuild:dev'],
-      options: {
-        livereload: true
-      }
+      files: files,
+      tasks: ['prepareBuild:dev']
+    },
+    dist: {
+      files: files,
+      tasks: ['build:dist']
     }
   };
 }());

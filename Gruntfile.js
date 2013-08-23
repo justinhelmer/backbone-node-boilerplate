@@ -108,6 +108,16 @@
       'clean:dev'
     ]);
 
+    // alias for concurrent:dev
+    grunt.registerTask('server:dev', 'Run concurrent:dev', [
+      'concurrent:dev'
+    ]);
+
+    // alias for concurrent:dist
+    grunt.registerTask('server:dist', 'Run concurrent:dist', [
+      'concurrent:dist'
+    ]);
+
     // Register build task that will run both dev and dist builds
     grunt.registerTask('build', 'build dev and dist', [
       'build:dist', // running 'dist' first, since 'dev' has a blocking watch task
