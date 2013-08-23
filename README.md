@@ -27,7 +27,7 @@ Pull requests are encouraged.
 From the root of your working copy (the repository clone), run the following commands:
 
 ```shell
-$> chmod +x setup.sh
+$> chmod 755 setup.sh
 $> ./setup.sh
 ```
 
