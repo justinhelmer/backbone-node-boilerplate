@@ -46,10 +46,12 @@ Next, open the file located at `server/config.js`, and set the configuration opt
 
   module.exports = {
     apiRoot : '/',
-    version : 'v1',
     host : '127.0.0.1',
     port : 3000,
-    corsOptions : {} // access to all origins (not safe for production)
+    corsOptions : {}, // access to all origins (not safe for production),
+    contentNegotiation: { // assumes 1<->1 relationship
+      'application/vnd.emal.webclient+json': 'json'
+    }
   };
 }());
 ```
@@ -64,8 +66,10 @@ Finally, open the file located at `client/app/js/config.js`, and make sure the A
 
 define({
   api: {
-    // HOSTS entries point *.backbone.ops.com to 127.0.0.1
-    url: 'http://api.backbone.ops.com:3000/v1/'
+    url: 'http://api.emal.com:3000/v1/',
+
+    // Use version 1 of the API
+    version: 'v1'
   }
 });
 ```
