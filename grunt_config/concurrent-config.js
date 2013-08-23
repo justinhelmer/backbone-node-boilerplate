@@ -9,11 +9,14 @@
   'use strict';
 
   module.exports = {
+    options: {
+      logConcurrentOutput: true
+    },
     dev: {
-      tasks: ['nodemon:dev', 'watch:dev'],
-      options: {
-        logConcurrentOutput: true
-      }
+      tasks: ['nodemon:dev', 'connect:dev', 'watch:dev']
+    },
+    dist: {
+      tasks: ['nodemon:dev', 'connect:dev']
     }
   };
 }());

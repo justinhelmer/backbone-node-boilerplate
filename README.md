@@ -66,10 +66,10 @@ Finally, open the file located at `client/app/js/config.js`, and make sure the A
 
 define({
   api: {
-    url: 'http://api.emal.com:3000/v1/',
+    url: 'http:127.0.0.1:3000',
 
-    // Use version 1 of the API
-    version: 'v1'
+    // Use version 1.0 of the API
+    version: '1.0'
   }
 });
 ```

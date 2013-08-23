@@ -43,6 +43,11 @@
         type   : 'node'
       },
       {
+        config : 'connect',
+        module : 'grunt-contrib-connect',
+        type   : 'node'
+      },
+      {
         config : 'clean',
         module : 'grunt-contrib-clean',
         type   : 'node'
@@ -80,7 +85,7 @@
     // Register custom dev build task
     grunt.registerTask('build:dev', 'Run dev build process and launch node server', [
       'prepareBuild:dev',
-      'server'
+      'server:dev'
     ]);
 
     // Register custom dist build task
@@ -104,8 +109,13 @@
     ]);
 
     // Register custom build task that launches server and restarts when files change
-    grunt.registerTask('server', 'launch node server and wait for changes to dev files', [
+    grunt.registerTask('server:dev', 'launch node server and wait for changes to dev files', [
       'concurrent:dev'
+    ]);
+
+    // Register custom build task that launches server
+    grunt.registerTask('server:dist', 'launch node server', [
+      'concurrent:dist'
     ]);
 
     // Register build task that will run both dev and dist builds

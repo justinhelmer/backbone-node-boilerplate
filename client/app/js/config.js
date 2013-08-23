@@ -7,8 +7,7 @@
 
 define({
   api: {
-    // HOSTS entries point *.backbone.ops.com to API server IP
-    url: 'http://api.backbone.ops.com:3000/',
+    url: 'http://127.0.0.1:3000/',
 
     // Use version 1.0 of the API
     version: '1.0',
