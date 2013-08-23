@@ -85,7 +85,7 @@
     // Register custom dev build task
     grunt.registerTask('build:dev', 'Run dev build process and launch node server', [
       'prepareBuild:dev',
-      'server:dev'
+      'concurrent:dev'
     ]);
 
     // Register custom dist build task
@@ -106,16 +106,6 @@
       'copy:dev',
       'compass:dev',
       'clean:dev'
-    ]);
-
-    // Register custom build task that launches server and restarts when files change
-    grunt.registerTask('server:dev', 'launch node server and wait for changes to dev files', [
-      'concurrent:dev'
-    ]);
-
-    // Register custom build task that launches server
-    grunt.registerTask('server:dist', 'launch node server', [
-      'concurrent:dist'
     ]);
 
     // Register build task that will run both dev and dist builds

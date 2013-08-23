@@ -33,46 +33,6 @@ $> ./setup.sh
 
 This will install the necessary requirements for your system.
 
-Next, open the file located at `server/config.js`, and set the configuration options you would like to launch your node server with, i.e.:
-
-```js
-/**
- * @file config.js
- * Define global server-side configuration
- */
-
-(function () {
-  'use strict';
-
-  module.exports = {
-    apiRoot : '/',
-    host : '127.0.0.1',
-    port : 3000,
-    corsOptions : {}, // access to all origins (not safe for production),
-    contentNegotiation: { // assumes 1<->1 relationship
-      'application/vnd.emal.webclient+json': 'json'
-    }
-  };
-}());
-```
-
-Finally, open the file located at `client/app/js/config.js`, and make sure the API url for your environment corresponds with the server configuration you just set up for node, i.e.:
-
-```js
-/**
- * @file config.js
- * Define global client-side configuration
- */
-
-define({
-  api: {
-    url: 'http:127.0.0.1:3000',
-
-    // Use version 1.0 of the API
-    version: '1.0'
-  }
-});
-```
 
 ## Building the web app
 
@@ -80,7 +40,7 @@ The system uses [Grunt](http://gruntjs.com/) to handle various repetitive tasks.
 
 There are two build modes: `dev` and `dist`:
 
-- `dev` is faster, and will automatically launch the local node server to make API requests.
+- `dev` is faster, and will automatically launch a local web server and node server to make API requests.
 
 ```shell
 
@@ -96,32 +56,20 @@ $> grunt build:dist
 
 ```
 
-From here, set up a virtual host entry to point to the particular build of choice:
-
-`client/build/dev`, or `client/build/dist` (or both).
-
-## Grunt Tips
-
-Although the `build:dev` task is relatively fast, the grunt tasks have been set up in a way that will allow for updating only specific components.
-
-In addition, you can chain multiple grunt tasks together in the command line with `[space]`.
-
-For example, if you are only making `.scss` tweaks, you can recompile the sass and launch a node server with the following command:
-
-```shell
-$> grunt compass:dev server
-```
-
-The same holds true for all of the installed grunt plugins.
-
-I have also set up a default grunt task which runs the build processes for both `dev` and `dist`. Simply run:
+There is also a default grunt task which first runs `build:dist`, then runs `build:dev`. Simply run:
 
 ```shell
 $> grunt
 ```
 
-..and you will get full working builds, as well as launch a node server.
+## Launching the web app
 
+The `build:dev` grunt task additionally triggers `concurrent:dev`, which launches a local web server on port 9001, and a local node server on port 3000.
+
+When the local servers are running, open a web browser and visit http://localhost:9001 to view the web app. Requests to the node server are made to http://localhost:3000
+These configuration options can be changed at `client/app/js/config.js` and `server/config.js`.
+
+Additionally, `concurrent:dev` listens for changes to development files, and will re-build application files and re-launch local servers automatically. If you have [LiveReload](http://livereload.com/) installed and running on your system, then the browser will automatically refresh to show the changes on each save.
 
 ## Standards
 - [commonjs module and package systems](http://wiki.commonjs.org/wiki/CommonJS)

@@ -24,7 +24,10 @@
         '!<%= client.cssPath %>/*_all.scss',
         '<%= client.cssPath %>/views/*.scss'
       ],
-      tasks: ['prepareBuild:dev']
+      tasks: ['prepareBuild:dev'],
+      options: {
+        livereload: true
+      }
     }
   };
 }());
