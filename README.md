@@ -112,8 +112,6 @@ For example, if you are only making `.scss` tweaks, you can recompile the sass a
 $> grunt compass:dev server
 ```
 
-Couple this with Chrome's [LiveReload](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en), and you can even avoid refreshing the browser
-
 The same holds true for all of the installed grunt plugins.
 
 I have also set up a default grunt task which runs the build processes for both `dev` and `dist`. Simply run:
