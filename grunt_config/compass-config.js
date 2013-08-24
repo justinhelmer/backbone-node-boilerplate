@@ -8,21 +8,23 @@
 (function () {
   'use strict';
 
-  module.exports = {
-    options: {
-      sassDir: '<%= client.cssPath %>',
-    },
-    dev: {
+  module.exports = function (args) {
+    return {
       options: {
-        cssDir: '<%= buildPaths.dev %>/css',
-        environment: 'development'
+        sassDir: '<%= client.cssPath %>',
+      },
+      dev: {
+        options: {
+          cssDir: '<%= buildPaths.dev %>/css',
+          environment: 'development'
+        }
+      },
+      dist: {
+        options: {
+          cssDir: '<%= buildPaths.dist %>/css',
+          environment: 'production'
+        }
       }
-    },
-    dist: {
-      options: {
-        cssDir: '<%= buildPaths.dist %>/css',
-        environment: 'production'
-      }
-    }
+    };
   };
 }());

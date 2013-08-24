@@ -8,12 +8,14 @@
 (function () {
   'use strict';
 
-  module.exports = {
-    server: {
-      options: {
-        file: 'server.js',
-        cwd: '<%= server.rootPath %>'
+  module.exports = function (args) {
+    return {
+      server: {
+        options: {
+          file: 'server.js',
+          cwd: '<%= server.rootPath %>'
+        }
       }
-    }
+    };
   };
 }());

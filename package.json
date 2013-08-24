@@ -18,6 +18,7 @@
     "cors": "~1.0.1",
     "grunt-nodemon": "0.0.10",
     "grunt-concurrent": "~0.3.0",
-    "grunt-contrib-connect": "~0.3.0"
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-open": "~0.2.2"
   }
 }

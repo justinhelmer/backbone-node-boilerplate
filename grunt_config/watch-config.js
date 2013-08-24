@@ -23,17 +23,19 @@
     '<%= client.cssPath %>/views/*.scss'
   ];
 
-  module.exports = {
-    options: {
-      livereload: true
-    },
-    dev: {
-      files: files,
-      tasks: ['prepareBuild:dev']
-    },
-    dist: {
-      files: files,
-      tasks: ['build:dist']
-    }
+  module.exports = function (args) {
+    return {
+      options: {
+        livereload: true
+      },
+      dev: {
+        files: files,
+        tasks: ['prepareBuild:dev']
+      },
+      dist: {
+        files: files,
+        tasks: ['build:dist']
+      }
+    };
   };
 }());

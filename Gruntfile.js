@@ -3,8 +3,11 @@
 
   module.exports = function(grunt) {
     var config = require('./grunt-config.js');
+    var args = {
+      browser: grunt.option('browser') || false
+    };
 
-    // initialize project configuration with path variable for use elsewhere
+    // initialize project configuration for use elsewhere
     grunt.initConfig(config);
 
     // Include lodash (underscore) for their nice utility functions
@@ -48,6 +51,11 @@
         type   : 'node'
       },
       {
+        config : 'open',
+        module : 'grunt-open',
+        type   : 'node'
+      },
+      {
         config : 'clean',
         module : 'grunt-contrib-clean',
         type   : 'node'
@@ -76,7 +84,8 @@
       }
 
       // Establish config for this task. Each task config is in its own file
-      grunt.config(task.config, require(config.configPath + '/' + task.config + '-config'));
+      var init = require(config.configPath + '/' + task.config + '-config');
+      grunt.config(task.config, init(args));
     });
 
     // Load external (non-node_module) tasks
@@ -108,14 +117,14 @@
       'clean:dev'
     ]);
 
-    // alias for concurrent:dev
+    // Run concurrent:dev and launch browser
     grunt.registerTask('server:dev', 'Run concurrent:dev', [
-      'concurrent:dev'
+      'concurrent:devBrowser'
     ]);
 
-    // alias for concurrent:dist
+    // Run concurrent:dist and launch browser
     grunt.registerTask('server:dist', 'Run concurrent:dist', [
-      'concurrent:dist'
+      'concurrent:distBrowser'
     ]);
 
     // Register build task that will run both dev and dist builds

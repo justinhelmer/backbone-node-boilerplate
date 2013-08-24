@@ -8,20 +8,22 @@
 (function () {
   'use strict';
 
-  module.exports = {
-    options: {
-      appDir: '<%= client.rootPath %>',
-      baseUrl: './js',
-      name: 'main',
-      mainConfigFile: '<%= client.scriptPath %>/main.js',
-      skipDirOptimize: true
-    },
-    dist: {
+  module.exports = function (args) {
+    return {
       options: {
-        dir: '<%= buildPaths.dist %>',
-        optimize: 'uglify2',
-        optimizeCss: 'none'
+        appDir: '<%= client.rootPath %>',
+        baseUrl: './js',
+        name: 'main',
+        mainConfigFile: '<%= client.scriptPath %>/main.js',
+        skipDirOptimize: true
+      },
+      dist: {
+        options: {
+          dir: '<%= buildPaths.dist %>',
+          optimize: 'uglify2',
+          optimizeCss: 'none'
+        }
       }
-    }
+    };
   };
 }());

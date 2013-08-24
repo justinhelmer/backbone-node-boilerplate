@@ -8,20 +8,22 @@
 (function () {
   'use strict';
 
-  module.exports = {
-    options: {
-      port: 9001,
-      keepalive: true
-    },
-    dev: {
+  module.exports = function (args) {
+    return {
       options: {
-        base: 'client/build/dev'
+        port: 9001,
+        keepalive: true
+      },
+      dev: {
+        options: {
+          base: '<%= buildPaths.dev %>'
+        }
+      },
+      dist: {
+        options: {
+          base: '<%= buildPaths.dist %>'
+        }
       }
-    },
-    dist: {
-      options: {
-        base: 'client/build/dist'
-      }
-    }
+    };
   };
 }());

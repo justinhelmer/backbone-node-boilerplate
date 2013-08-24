@@ -8,10 +8,12 @@
 (function () {
   'use strict';
 
-  module.exports = {
-    files: {
-      // All sass files that begin with "_' in cssPath will be imported into _all
-      src: ['<%= client.cssPath %>/views/_all.scss']
-    }
+  module.exports = function (args) {
+    return {
+      files: {
+        // All sass files that begin with "_' in cssPath will be imported into _all
+        src: ['<%= client.cssPath %>/views/_all.scss']
+      }
+    };
   };
 }());
