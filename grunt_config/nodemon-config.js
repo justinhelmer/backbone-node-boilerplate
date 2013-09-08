@@ -10,7 +10,14 @@
 
   module.exports = function (args) {
     return {
-      server: {
+      dev: {
+        options: {
+          file: 'server.js',
+          nodeArgs: ['--debug'],
+          cwd: '<%= server.rootPath %>'
+        }
+      },
+      dist: {
         options: {
           file: 'server.js',
           cwd: '<%= server.rootPath %>'

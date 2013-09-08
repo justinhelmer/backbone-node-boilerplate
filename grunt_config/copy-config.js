@@ -28,10 +28,10 @@
           },
           {
             // copy images
-            src:  ['imgs/*'],
+            src:  ['**'],
             dest: '<%= buildPaths.dev %>/imgs',
             expand: true,
-            cwd: '<%= client.rootPath %>'
+            cwd: '<%= client.imgPath %>'
           },
         ],
       }

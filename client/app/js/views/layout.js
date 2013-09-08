@@ -7,25 +7,20 @@
 
 define([
   'views/base',
-  'views/header/block',
-  'views/footer/block'
-], function(BaseView, HeaderBlockView, FooterBlockView) {
+  'views/header',
+  'views/navigation',
+  'views/footer'
+], function(BaseView, HeaderView, NavigationView, FooterView) {
   'use strict';
 
   var LayoutView = BaseView.extend({
     el: '#container',
-    template: 'LayoutView',
+    template: 'layout',
 
-    initialize: function () {
-      this.render();
-      new HeaderBlockView();
-      new FooterBlockView();
-    },
-
-    render: function () {
-      $(this.el).html(this.hbars());
-
-      return this;
+    postRender: function () {
+      new HeaderView();
+      new NavigationView();
+      new FooterView();
     }
   });
 

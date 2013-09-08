@@ -11,7 +11,8 @@ define([
   'use strict';
 
   var PageView = BaseView.extend({
-    el: '#main'
+    el: '#main',
+    template: 'page'
   });
 
   return PageView;

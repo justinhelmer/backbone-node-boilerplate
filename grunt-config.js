@@ -15,6 +15,7 @@
   module.exports = {
     client: {
       rootPath      : appPath,
+      imgPath       : appPath + '/imgs',
       cssPath       : appPath + '/css',
       scriptPath    : appPath + '/js',
       libraryPath   : appPath + '/js/libs',

@@ -30,28 +30,24 @@ require.config({
 });
 
 require([
+  'backbone',
   'jquery',
-  'views/layout',
+  'lodash',
   'router',
-  'config'
-], function ($, LayoutView, Router, config) {
+  'config',
+  'views'
+], function (Backbone, $, _, Router, config, Views) {
   'use strict';
+
+  // Initialize a global route handler
+  new Router();
 
   // Prepare default AJAX request options
   $.ajaxSetup({
     headers: {
-      'Accept': 'application/vnd.jhelmer.backbone-node-boilerplate+json; version=' + config.api.version
+      'Accept': config.api.vendorJSON + '; version=' + config.api.version
     }
   });
-
-  // Initialize and render the application container
-  new LayoutView();
-
-  // Initialize a global route handler
-  Router.initialize();
-
-  // Trigger the initial route and enable HTML5 pushState support
-  Backbone.history.start({pushState: true});
 
   // All navigation that is relative should be passed through the navigate
   // method, to be processed by the router. If the link has a `data-bypass`
@@ -77,5 +73,14 @@ require([
       // calls this anyways.  The fragment is sliced from the root.
       Backbone.history.navigate(href.attr, true);
     }
+  });
+
+  // Initialize and render the application container
+  new Views.layout();
+
+  // Trigger the initial route and enable HTML5 pushState support
+  Backbone.history.start({
+    pushState: true,
+    urlRoot: '/'
   });
 });

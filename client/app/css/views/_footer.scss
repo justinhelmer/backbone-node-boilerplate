@@ -1,0 +1,12 @@
+$footer-background-color: #f1f1f1;
+
+#footer {
+  @include border-bottom-radius($global-radius);
+  background-color: $footer-background-color;
+  border-top: 1px solid $secondary-color;
+  font-size: $h1-font-size;
+  height: emCalc(50);
+  line-height: emCalc(50);
+  overflow: hidden;
+  text-align: center;
+}

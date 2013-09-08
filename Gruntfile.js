@@ -71,6 +71,11 @@
         type   : 'node'
       },
       {
+        config : 'node-inspector',
+        module : 'grunt-node-inspector',
+        type   : 'node'
+      },
+      {
         config : 'sass-directory-imports',
         module : 'sass-directory-imports',
         type   : 'other'

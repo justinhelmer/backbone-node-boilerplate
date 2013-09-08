@@ -24,19 +24,22 @@ Pull requests are encouraged.
 
 ## Getting Started
 
-From the root of your working copy (the repository clone), run the following command:
+There are two options to get started with this web app:
 
-> For OSX / Linux
-```shell
-$> sudo ./setup.sh
-```
+1. Clone, build, and launch all in one step:
+  > Download `onestep.sh` from the repository, and move it to where you want a working copy. Then run:
 
-> For Windows, using *nix-style command prompt, e.g. [Git Bash](http://git-scm.com/downloads)
-```shell
-$> ./setup.sh
-```
+  ```shell
+  $> chmod +x onestep.sh && ./onestep.sh
+  ```
 
-This will install the necessary requirements for your system.
+2. Clone project using your own tooling, and run setup script:
+
+  ```shell
+  $> chmod +x setup.sh && ./setup.sh
+  ```
+
+  > This will install the necessary requirements on your system. Hoever, note that with this method, you will have to [build](#building-the-web-app) as a separate step.
 
 ## Building the web app
 
@@ -66,15 +69,15 @@ There is also a default grunt task which first runs `build:dist`, then runs `bui
 $> grunt
 ```
 
+**tip:** run any grunt task with the `--browser` flag to open the web app in a browser window
+
 ## Launching the web app
 
-The `build:dev` grunt task additionally triggers `server:dev`, which launches a local web server on port 9001, a local node server on port 3000, as well as a [LiveReload](http://livereload.com/) server.
+The `build:dev` grunt task additionally triggers `concurrent:dev`, which launches a local web server on port 9001, a local node server on port 3000, a [LiveReload](http://livereload.com/) server on port 35729, and a [Node Inspector](https://github.com/node-inspector/node-inspector) server on port 5858, with web access (Chrome) on port 8080.
 
-When the local servers are running, open a web browser and visit [http://localhost:9001](http://localhost:9001) to view the web app. By default, requests to the node server are made to [http://localhost:3000](http://localhost:3000) - these configuration options can be changed at `client/app/js/config.js` and `server/config.js`.
+When the local servers are running, open a web browser and visit [http://127.0.0.1:9001](http://127.0.0.1:9001) to view the web app. By default, requests to the node server are made to [http://127.0.0.1:3000](http://127.0.0.1:3000) - these configuration options can be changed at `client/app/js/config.js` and `server/config.js`. In another window or tab, open [http://127.0.0.1:8080/debug?port=5858](http://127.0.0.1:8080/debug?port=5858) to view the [Node Inspector](https://github.com/node-inspector/node-inspector) tool. This workflow will allow you to debug the client and server simultaneously, all using Chrome's Web Developer tools.
 
-Additionally, `server:dev` listens for changes to development files, and will re-build application files and re-launch local livereload, node, and web servers automatically. If you have [LiveReload](http://livereload.com/) installed and running on your system, then the browser will automatically refresh to show the changes on each save.
-
-When `build:dist` is run, the `server:dist` task must be manually triggered to launch local servers to watch dist files. The assumption here is that the `dist` build will not typically be re-build during development.
+Additionally, `concurrent:dev` triggers `watch:dev`, which listens for changes to development files, and will re-build application files and re-launch local livereload, node, and web servers automatically. If you have [LiveReload](http://livereload.com/) installed and running on your system, then the browser will automatically refresh to show the changes on each save.
 
 ## Standards
 - [commonjs module and package systems](http://wiki.commonjs.org/wiki/CommonJS)
@@ -99,6 +102,7 @@ options: {
 - [Node](http://nodejs.org/api/)
 - [Npm](https://npmjs.org/doc/)
 - [Express](http://expressjs.com/api.html)
+- [Node Inspector](https://github.com/node-inspector/node-inspector)
 
 ## Client Technologies
 - [Backbone](http://backbonejs.org/)

@@ -1,20 +1,20 @@
 /**
  * @file fooList.js
- * Set up FooList collection
+ * Backbone collection to maintain a list of foos
  *
- * @author Justin Helmer 8/11/2013
+ * @author Justin Helmer 9/7/2013
  */
 
 define([
+  'backbone',
   'config',
-  'collections/base',
-  'models/foo'
-], function(config, BaseCollection, FooModel) {
+  'models/foo',
+], function(Backbone, config, FooModel) {
   'use strict';
 
-  var FooListCollection = BaseCollection.extend({
-    model: FooModel,
-    url: config.api.url + 'foos'
+  var FooListCollection = Backbone.Collection.extend({
+    url: config.api.url + 'foo',
+    model: FooModel
   });
 
   return FooListCollection;

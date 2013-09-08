@@ -1,7 +1,43 @@
-#main {
-  background: #FEFEFE;
+body {
+  margin: 0 auto;
+  max-width: 1000px;
+}
 
-  div {
-    border: none !important;
+input[type="text"],
+input[type="search"] {
+  padding: emCalc(6, 9);
+}
+
+input.placeholder,
+input:-moz-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder,
+input::-webkit-input-placeholder {
+  color: $placeholder-text-color;
+}
+
+div.clear {
+  @include clearfix();
+}
+
+#container {
+  border: 1px solid $secondary-color;
+  margin-bottom: 40px;
+}
+
+#main {
+  padding: ($column-gutter / 2) 0;
+}
+
+@media #{$small} {
+  #main-wrapper {
+    @include grid-column(12);
   }
 }
+
+@media #{$medium} {
+  #main-wrapper {
+    @include grid-column(9);
+  }
+}
+

@@ -1,0 +1,11 @@
+$header-background-color: #f4f4f4;
+
+#header {
+  background-color: $header-background-color;
+  border-bottom: 1px solid $border-color;
+  font-size: $h1-font-size;
+  height: emCalc(50);
+  line-height: emCalc(50);
+  overflow: hidden;
+  text-align: center;
+}

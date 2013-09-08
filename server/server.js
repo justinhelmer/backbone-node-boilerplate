@@ -22,7 +22,7 @@
   var app = express();
 
   // Initialize a variable that will store each resource's name,
-  // along with the names of any actions, targetedActions, and relationships
+  // along with the names of any actions and targetedActions
   var resources = {};
 
   // Initialize a variable that will store a direct reference to all active resources by version.
@@ -40,14 +40,13 @@
       var resource = require('./resources/' + version + '/' + filename);
 
       // Add a direct reference to this particular version of the resource
-      resourcesByVersion[version][resource.name] = resource;
+      resourcesByVersion[version][resource.resourceName] = resource;
 
       // Add this resource's names to the full list of available resources, if it hasn't been done
-      if (typeof resources[resource.name] === 'undefined') {
-        resources[resource.name] = {
+      if (typeof resources[resource.resourceName] === 'undefined') {
+        resources[resource.resourceName] = {
           actions: [],
-          targetedActions: [],
-          relationships: []
+          targetedActions: []
         };
       }
 
@@ -57,9 +56,9 @@
         if (_.isObject(resource.api[standardContentType].actions)) {
           // Iterate through all actions for this resource
           _.each(resource.api[standardContentType].actions, function (callback, controller) {
-            if (_.indexOf(resources[resource.name].actions, controller) === -1) {
+            if (_.indexOf(resources[resource.resourceName].actions, controller) === -1) {
               // Add this controller to the list of available actions for this resource
-              resources[resource.name].actions.push(controller);
+              resources[resource.resourceName].actions.push(controller);
             }
           });
         }
@@ -67,19 +66,9 @@
         if (_.isObject(resource.api[standardContentType].targetedActions)) {
           // Iterate through all targeted actions for this resource
           _.each(resource.api[standardContentType].targetedActions, function (callback, controller) {
-            if (_.indexOf(resources[resource.name].targetedActions, controller) === -1) {
+            if (_.indexOf(resources[resource.resourceName].targetedActions, controller) === -1) {
               // Add this controller to the list of available targeted actions for this resource
-              resources[resource.name].targetedActions.push(controller);
-            }
-          });
-        }
-
-        if (_.isObject(resource.api[standardContentType].relationships)) {
-          // Iterate through all relationships for this resource
-          _.each(resource.api[standardContentType].relationships, function (callback, controller) {
-            if (_.indexOf(resources[resource.name].relationships, controller) === -1) {
-              // Add this controller to the list of available relationships for this resource
-              resources[resource.name].relationships.push(controller);
+              resources[resource.resourceName].targetedActions.push(controller);
             }
           });
         }
@@ -99,56 +88,48 @@
   };
 
   // Loop through the known active resource names and set up CRUD actions per resource
-  _.each(resources, function (nonCrudControllers, name) {
+  _.each(resources, function (nonCrudControllers, resourceName) {
     // Store paths used for API calls in memory for easy access
     var paths = {
       // "Resource path" is used by create, and actions
-      rpath : config.apiRoot + name,
+      rpath : config.apiRoot + resourceName,
       // "Entity path" is used by retrieve, update, delete, and targeted actions
-      epath : config.apiRoot + name + '/:id',
+      epath : config.apiRoot + resourceName + '/:id',
     };
 
     /**
      * Set up all controllers for this particular resource
      * Controllers:
      * C, R, U, D = Create, Retrieve, Update, Delete
-     * I = Index (can be filtered)
+     * I = Index
      * A = Action
      * T = Targeted action
-     * X = Relationship request
      */
     // (C) Create:
-    app.post(paths.rpath, middleware('create', name));
+    app.post(paths.rpath, middleware('create', resourceName));
 
     // (R) Retrieve:
-    app.get(paths.epath, middleware('retrieve', name));
+    app.get(paths.epath, middleware('retrieve', resourceName));
 
     // (U) Update:
-    app.put(paths.epath, middleware('update', name));
+    app.put(paths.epath, middleware('update', resourceName));
 
     // (D) Delete:
-    app.del(paths.epath, middleware('del', name));
+    app.del(paths.epath, middleware('del', resourceName));
 
     // (I) Index:
-    app.get(paths.rpath, middleware('index', name));
+    app.get(paths.rpath, middleware('index', resourceName));
 
-    // (A) Actions, (T) Targeted actions, and (X) Relationship requests are all POSTs,
-    // only the paths differ.
+    // (A) Actions and (T) Targeted actions requests can be any number of methods;
+    // set up express routes for each.
     _.each(nonCrudControllers, function (controllers, type) {
       // The path differs depending on the type of controller
-      var path;
-      switch (type) {
-      case 'targetedActions':
-      case 'relationships':
-        path = paths.epath;
-        break;
-      case 'actions':
-        path = paths.rpath;
-        break;
-      }
+      var path = (type === 'actions') ? (paths.rpath) : (paths.epath);
 
       _.each(controllers, function (controller) {
-        app.post(path + '/' + controller, middleware(controller, name));
+        app.get(path + '/' + controller, middleware(controller, resourceName));
+        app.post(path + '/' + controller, middleware(controller, resourceName));
+        app.put(path + '/' + controller, middleware(controller, resourceName));
       });
     });
   });

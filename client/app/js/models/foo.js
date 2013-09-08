@@ -6,13 +6,13 @@
  */
 
 define([
-  'backbone',
+  'models/base',
   'config'
-], function(Backbone, config) {
+], function(BaseModel, config) {
   'use strict';
 
-  var FooModel = Backbone.Model.extend({
-    urlRoot: config.api.url + 'foos',
+  var FooModel = BaseModel.extend({
+    urlRoot: config.api.url + 'foo',
 
     defaults: {
       name: '',

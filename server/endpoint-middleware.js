@@ -25,13 +25,17 @@
       var vendorContentType = accept.value;
 
       // Create a reference to the appropriate resource for the version and type requested.
-      var resource;
+      var resource, endpoint;
       if (typeof resourcesByVersion[version] !== 'undefined') {
-        var endpoint = resourcesByVersion[version][resourceName]; // still might be undefined
+        endpoint = resourcesByVersion[version][resourceName]; // still might be undefined
 
         if (typeof endpoint !== 'undefined') {
           var standardContentType = config.contentNegotiation[vendorContentType];
           resource = endpoint.api[standardContentType];
+        }
+        else {
+          res.send(404, 'Resource "' + resourceName + '" does not exist');
+          next(new Error('Resource "' + resourceName + '" does not exist'));
         }
       }
 
@@ -40,9 +44,8 @@
         resource[controller](req, res, next);
       }
       else {
-        // No valid endpoint for the type/version of data requested
-        res.send(406, 'Invalid resource request');
-        next(new Error('Invalid resource request'));
+        res.send(406, 'Resource "' + resourceName + '" not avaliable for Content-Type: ' + vendorContentType);
+        next(new Error('Resource "' + resourceName + '" not avaliable for Content-Type: ' + vendorContentType));
       }
     };
   };

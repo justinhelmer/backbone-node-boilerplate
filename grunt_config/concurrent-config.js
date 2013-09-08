@@ -10,10 +10,10 @@
 
   module.exports = function (args) {
     var allTasks = {
-      dev: ['nodemon:server', 'connect:dev', 'watch:dev'],
-      dist: ['nodemon:server', 'connect:dist', 'watch:dist'],
-      devBrowser: ['nodemon:server', 'connect:dev', 'open', 'watch:dev'],
-      distBrowser: ['nodemon:server', 'connect:dist', 'open', 'watch:dist']
+      dev: ['nodemon:dev', 'node-inspector:dev', 'connect:dev', 'watch:dev'],
+      dist: ['nodemon:dist', 'connect:dist', 'watch:dist'],
+      devBrowser: ['nodemon:dev', 'node-inspector:dev', 'connect:dev', 'open', 'watch:dev'],
+      distBrowser: ['nodemon:dist', 'connect:dist', 'open', 'watch:dist']
     };
 
     var tasks = {
