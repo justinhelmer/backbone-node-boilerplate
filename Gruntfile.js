@@ -13,88 +13,43 @@
     // Include lodash (underscore) for their nice utility functions
     var _ = require(config.client.libraryPath + '/lodash/lodash');
 
-    // Create an array of information about node_module tasks and grunt_tasks
-    var tasks = [
-      {
-        config : 'jshint',
-        module : 'grunt-contrib-jshint',
-        type   : 'node'
-      },
-      {
-        config : 'handlebars',
-        module : 'grunt-contrib-handlebars',
-        type   : 'node'
-      },
-      {
-        config : 'copy',
-        module : 'grunt-contrib-copy',
-        type   : 'node'
-      },
-      {
-        config : 'compass',
-        module : 'grunt-contrib-compass',
-        type   : 'node'
-      },
-      {
-        config : 'requirejs',
-        module : 'grunt-contrib-requirejs',
-        type   : 'node'
-      },
-      {
-        config : 'watch',
-        module : 'grunt-contrib-watch',
-        type   : 'node'
-      },
-      {
-        config : 'connect',
-        module : 'grunt-contrib-connect',
-        type   : 'node'
-      },
-      {
-        config : 'open',
-        module : 'grunt-open',
-        type   : 'node'
-      },
-      {
-        config : 'clean',
-        module : 'grunt-contrib-clean',
-        type   : 'node'
-      },
-      {
-        config : 'concurrent',
-        module : 'grunt-concurrent',
-        type   : 'node'
-      },
-      {
-        config : 'nodemon',
-        module : 'grunt-nodemon',
-        type   : 'node'
-      },
-      {
-        config : 'node-inspector',
-        module : 'grunt-node-inspector',
-        type   : 'node'
-      },
-      {
-        config : 'sass-directory-imports',
-        module : 'sass-directory-imports',
-        type   : 'other'
-      }
-    ];
-
     _.each(tasks, function (task) {
-      // Register the task
-      if (task.type === 'node') {
-        grunt.loadNpmTasks(task.module);
-      }
-
       // Establish config for this task. Each task config is in its own file
-      var init = require(config.configPath + '/' + task.config + '-config');
-      grunt.config(task.config, init(args));
+      var init = require(config.configPath + '/' + task + '-config');
+      grunt.config(task, init(args));
     });
 
-    // Load external (non-node_module) tasks
+    // Load grunt npm modules
+    _.each(require('matchdep').filterDev('grunt-*'), function (moduleName) {
+      // Load the npm grunt task
+      grunt.loadNpmTasks(moduleName);
+
+      if (moduleName !== 'grunt-connect-proxy') {
+        // Assume the config name is everything after the string `grunt-` or `grunt-contrib`.
+        // e.g. `grunt-contrib-requirejs` --> `requirejs`, `grunt-node-inspector` --> `node-inspector`
+        // NOTE that this may not always be the case
+        var configName = moduleName.replace('grunt-contrib-', '').replace('grunt-', '');
+
+        // Require the appropriate configuration for this npm task
+        var init = require(config.configPath + '/' + configName + '-config');
+        grunt.config(configName, init(args));
+      }
+    });
+
+    // Prepare an object of external (non-npm) tasks
+    var tasks = {
+      // module => config
+      'sass-directory-imports' : 'sass-directory-imports'
+    };
+
+    // Load the non-npm grunt tasks
     grunt.loadTasks(config.tasksPath);
+
+    // Require the approriate configuration for each non-npm task
+    _.each(tasks, function (configName, moduleName) {
+      var init = require(config.configPath + '/' + configName + '-config');
+      grunt.config(configName, init(args));
+    });
 
     // Register custom dev build task
     grunt.registerTask('build:dev', 'Run dev build process and launch node server', [
