@@ -79,8 +79,5 @@ require([
   new Backbone.viewConstructors.layout();
 
   // Trigger the initial route and enable HTML5 pushState support
-  Backbone.history.start({
-    pushState: true,
-    urlRoot: '/'
-  });
+  Backbone.history.start({pushState: true});
 });
