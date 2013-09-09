@@ -144,7 +144,12 @@ define([
         });
         break;
       default:
-
+        require(['views/error'], function (ErrorView) {
+          new ErrorView({
+            status: resp.statusText || 'Unknown error',
+            message: resp.responseText || 'Unable to reach host'
+          });
+        });
         break;
       }
 

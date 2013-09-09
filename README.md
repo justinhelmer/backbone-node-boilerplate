@@ -80,8 +80,6 @@ When the local servers are running, open a web browser and visit [http://127.0.0
 Additionally, `concurrent:dev` triggers `watch:dev`, which listens for changes to development files, and will re-build application files and re-launch local livereload, node, and web servers automatically. If you have [LiveReload](http://livereload.com/) installed and running on your system, then the browser will automatically refresh to show the changes on each save.
 
 ## Standards
-- [commonjs module and package systems](http://wiki.commonjs.org/wiki/CommonJS)
-- [Semantic Versioning 2.0.0](http://semver.org/)
 - [JSHint](http://www.jshint.com/) with the following options:
 
 ```js
@@ -96,13 +94,14 @@ options: {
 },
 ```
 
-*NOTE that all custom javascript must adhere to EMCAScript 5's [Strict mode](https://developer.mozilla.org/en/JavaScript/Strict_mode).
+*NOTE that with `strict: true`, all custom javascript must adhere to EMCAScript 5's [Strict mode](https://developer.mozilla.org/en/JavaScript/Strict_mode).
 
 ## Server Technologies
 - [Node](http://nodejs.org/api/)
 - [Npm](https://npmjs.org/doc/)
 - [Express](http://expressjs.com/api.html)
 - [Node Inspector](https://github.com/node-inspector/node-inspector)
+- [Connect](http://www.senchalabs.org/connect/)
 
 ## Client Technologies
 - [Backbone](http://backbonejs.org/)
