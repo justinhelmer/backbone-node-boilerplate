@@ -10,9 +10,7 @@ define([
 ], function(PageView) {
   'use strict';
 
-  var ErrorView = PageView.extend({
-    template: 'error'
-  });
+  var ErrorView = PageView.extend({});
 
   return ErrorView;
 });

@@ -12,8 +12,6 @@ define([
   'use strict';
 
   var FooListView = PageView.extend({
-    template: 'fooList',
-
     init: function () {
       this.collection = new FooListCollection();
       return this;

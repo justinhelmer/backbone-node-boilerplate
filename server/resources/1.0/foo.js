@@ -75,7 +75,7 @@
       },
 
       /**
-       * actions may have GET and POST methods. Ensure method before request.
+       * actions may have GET, PUT and POST methods. Ensure method before request.
        */
       actions: {
         /**
@@ -94,11 +94,11 @@
       },
 
       /**
-       * targetedActions may have multiple methods. Ensure method before request.
+       * targetedActions may have GET, PUT and POST methods. Ensure method before request.
        */
       targetedActions: {
         /**
-         * Add the supplied user to the foo
+         * POST: Add the supplied user to the foo
          */
         user: function (req, res) {
           switch (req.method) {
@@ -106,7 +106,7 @@
             httpHandler.request(req, res);
             break;
           default:
-            res.send(500, 'Bad request');
+            res.send(406, 'The endpoint exists, but not for the requested method: ' + req.method);
             break;
           }
         }

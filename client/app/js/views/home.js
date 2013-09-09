@@ -10,9 +10,7 @@ define([
 ], function(PageView) {
   'use strict';
 
-  var HomeView = PageView.extend({
-    template: 'home'
-  });
+  var HomeView = PageView.extend({});
 
   return HomeView;
 });

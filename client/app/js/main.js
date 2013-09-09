@@ -36,7 +36,7 @@ require([
   'router',
   'config',
   'views'
-], function (Backbone, $, _, Router, config, Views) {
+], function (Backbone, $, _, Router, config) {
   'use strict';
 
   // Initialize a global route handler
@@ -76,7 +76,7 @@ require([
   });
 
   // Initialize and render the application container
-  new Views.layout();
+  new Backbone.viewConstructors.layout();
 
   // Trigger the initial route and enable HTML5 pushState support
   Backbone.history.start({

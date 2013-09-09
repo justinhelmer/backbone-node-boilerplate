@@ -15,7 +15,6 @@ define([
 
   var LayoutView = BaseView.extend({
     el: '#container',
-    template: 'layout',
 
     postRender: function () {
       new HeaderView();

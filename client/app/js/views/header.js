@@ -11,8 +11,7 @@ define([
   'use strict';
 
   var HeaderView = BlockView.extend({
-    el: '#header',
-    template: 'header'
+    el: '#header'
   });
 
   return HeaderView;

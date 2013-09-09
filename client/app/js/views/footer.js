@@ -11,8 +11,7 @@ define([
   'use strict';
 
   var FooterView = BlockView.extend({
-    el: '#footer',
-    template: 'footer'
+    el: '#footer'
   });
 
   return FooterView;

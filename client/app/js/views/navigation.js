@@ -11,8 +11,7 @@ define([
   'use strict';
 
   var NavigationView = BlockView.extend({
-    el: '#navigation',
-    template: 'navigation',
+    el: '#navigation'
   });
 
   return NavigationView;

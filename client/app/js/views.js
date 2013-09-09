@@ -1,23 +1,23 @@
 /**
  * @file views.js
- * Attach all view controllers to Backbone, because this app relies
- * Heavily on naming conventions for clean abstraction.
+ * Attach all view contstructors that have templates to Backbone,
+ * because this app relies heavily on naming conventions for clean abstraction.
  *
- * this is done so that constructors can be called by name, as to not use eval().
+ * This is done so that constructors can be called by name, as to not use eval().
+ * @TODO this may need to be addressed differently, so views aren't attached to Backbone
  */
 
-// @TODO generate this list dynamically from the ./views folder during build
+// @TODO generate this list dynamically from the ./views folder during build,
+// excluding views that don't have templates (base, page, block)
 var list = [
-  'views/base',
-  'views/block',
+  'views/layout',
+  'views/header',
+  'views/footer',
+  'views/navigation',
+  'views/home',
   'views/foo',
   'views/fooList',
-  'views/footer',
-  'views/header',
-  'views/home',
-  'views/layout',
-  'views/navigation',
-  'views/page'
+  'views/error'
 ];
 
 define(['backbone'].concat(list), function (Backbone) {
@@ -31,6 +31,6 @@ define(['backbone'].concat(list), function (Backbone) {
   // The constructors are passed in to the define[] context, after Backbone
   var constructors = _.toArray(arguments).slice(1);
 
-  // return an object of {constructorName => constructor} for all views.
-  return _.object(constructorNames, constructors);
+  // Make an object of {constructorName => constructor} for all views globally available
+  Backbone.viewConstructors = _.object(constructorNames, constructors);
 });

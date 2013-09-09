@@ -160,6 +160,30 @@ define([
      */
     handlebars: function (data) {
       return JST[_.result(this, 'template')](data);
+    },
+
+    /**
+     * Set the name of the template for handlebars rendering.
+     * Can be a string or a function that returns a string.
+     *
+     * Children CAN override this method
+     */
+    template: function () {
+      var _view = this;
+
+      var _viewName;
+      // Assume a template name that matches the name of the view.
+      // To get the name of the view, search through view constructors
+      // that have templates for a view that matches the instanceof property
+      var found = _.find(Backbone.viewConstructors, function (View, viewName) {
+        if (_view instanceof View) {
+          _viewName = viewName;
+          return true;
+        }
+        return false;
+      });
+
+      return _viewName;
     }
   });
 
