@@ -24,14 +24,12 @@ define([
 
     /**
      * Attach any models/collections to the view, if applicable.
-     * For simple views that don't require server data, prepare templateData.
      *
      * Children CAN override this method, and MUST `return this`.
      *
      * @return this for chaining
      */
     init: function () {
-      this.templateData = this.options;
       return this;
     },
 
@@ -62,14 +60,25 @@ define([
         // This view has either a model or collection
         this.nodeType = nodeType;
 
-        // Attach error handler, and data listeners
-        this.listenTo(node, 'error', this.renderError);
-        this.listenTo(node, 'ready', this.render);
-        node.fetch({
-          success: function () {
-            node.trigger('ready');
-          }
-        });
+        if (node.url) {
+          // This model/collection has an external data source
+          // Attach data ready listener and error handler
+          this.listenTo(node, 'ready', this.render);
+          this.listenTo(node, 'error', this.renderError);
+
+          // Attempt to retreive data from the external data source
+          node.fetch({
+            // Trigger "ready" when the data comes back.
+            // *NOTE "error" is triggered by Backbone already
+            success: function () {
+              node.trigger('ready');
+            }
+          });
+        }
+        else {
+          // This model/collection has no external data source
+          this.render();
+        }
       }
 
       return this;
@@ -95,7 +104,7 @@ define([
      * @return this for chaining
      */
     renderTemplate: function () {
-      var templateData = {};
+      var templateData = this.templateData || this.options;
 
       switch (this.nodeType) {
       case 'model':
@@ -105,7 +114,7 @@ define([
         templateData = this.collection.models;
         break;
       default:
-        templateData = this.templateData || {};
+        templateData = templateData || {};
       }
 
       this.$el.html(this.handlebars(templateData));
