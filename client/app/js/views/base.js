@@ -63,17 +63,11 @@ define([
         if (node.url) {
           // This model/collection has an external data source
           // Attach data ready listener and error handler
-          this.listenTo(node, 'ready', this.render);
-          this.listenTo(node, 'error', this.renderError);
+          this.listenTo(node, 'sync', this.render);
+          //this.listenTo(node, 'error', this.renderError);
 
           // Attempt to retreive data from the external data source
-          node.fetch({
-            // Trigger "ready" when the data comes back.
-            // *NOTE "error" is triggered by Backbone already
-            success: function () {
-              node.trigger('ready');
-            }
-          });
+          node.fetch();
         }
         else {
           // This model/collection has no external data source
@@ -135,7 +129,7 @@ define([
     renderError: function (node, resp, options) {
       switch (resp.status) {
       default:
-        require(['views/blocks/error'], function (ErrorView) {
+        require(['views/pages/error'], function (ErrorView) {
           new ErrorView({
             status: resp.statusText || 'Unknown error',
             message: resp.responseText || 'Unable to reach host'

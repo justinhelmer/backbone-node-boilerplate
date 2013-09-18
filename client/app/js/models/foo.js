@@ -6,13 +6,12 @@
  */
 
 define([
-  'models/base',
-  'config'
-], function(BaseModel, config) {
+  'models/base'
+], function(BaseModel) {
   'use strict';
 
   var FooModel = BaseModel.extend({
-    urlRoot: config.api.url + 'foo',
+    endpoint: 'foo',
 
     defaults: {
       name: '',

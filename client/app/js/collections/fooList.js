@@ -6,14 +6,13 @@
  */
 
 define([
-  'backbone',
-  'config',
-  'models/foo',
-], function(Backbone, config, FooModel) {
+  'collections/base',
+  'models/foo'
+], function(BaseCollection, FooModel) {
   'use strict';
 
-  var FooListCollection = Backbone.Collection.extend({
-    url: config.api.url + 'foo',
+  var FooListCollection = BaseCollection.extend({
+    endpoint: 'foo',
     model: FooModel
   });
 
