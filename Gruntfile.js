@@ -39,7 +39,8 @@
     // Prepare an object of external (non-npm) tasks
     var tasks = {
       // module => config
-      'sass-directory-imports' : 'sass-directory-imports'
+      'sass-directory-imports' : 'sass-directory-imports',
+      'generate-views-list' : 'generate-views-list'
     };
 
     // Load the non-npm grunt tasks
@@ -63,6 +64,8 @@
       'sass-directory-imports',
       'handlebars:dist',
       'requirejs:dist',
+      'generate-views-list',
+      'includes',
       'compass:dist',
       'clean:dist'
     ]);
@@ -73,6 +76,8 @@
       'sass-directory-imports',
       'handlebars:dist', // App currently doesn't work unless templates are already compiled.
       'copy:dev',
+      'generate-views-list',
+      'includes',
       'compass:dev',
       'clean:dev'
     ]);

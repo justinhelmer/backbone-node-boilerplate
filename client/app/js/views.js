@@ -7,18 +7,8 @@
  * @TODO this may need to be addressed differently, so views aren't attached to Backbone
  */
 
-// @TODO generate this list dynamically from the ./views folder during build,
-// excluding views that don't have templates (base, page, block)
-var list = [
-  'views/layout',
-  'views/blocks/header',
-  'views/blocks/footer',
-  'views/blocks/navigation',
-  'views/pages/home',
-  'views/pages/foo',
-  'views/pages/fooList',
-  'views/pages/error'
-];
+// @see grunt-includes
+//#include "_views.js"
 
 define(['backbone'].concat(list), function (Backbone) {
   'use strict';
