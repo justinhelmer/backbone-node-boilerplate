@@ -26,8 +26,8 @@
   '../js/libs/foundation/scss/foundation/components/block-grid',
   '../js/libs/foundation/scss/foundation/components/type',
   '../js/libs/foundation/scss/foundation/components/buttons',
-  '../js/libs/foundation/scss/foundation/components/side-nav';
-  // '../js/libs/foundation/scss/foundation/components/forms',
+  '../js/libs/foundation/scss/foundation/components/side-nav',
+  '../js/libs/foundation/scss/foundation/components/forms';
   // '../js/libs/foundation/scss/foundation/components/button-groups',
   // '../js/libs/foundation/scss/foundation/components/dropdown-buttons',
   // '../js/libs/foundation/scss/foundation/components/split-buttons',
@@ -59,7 +59,10 @@
 @import 'compass';
 
 // Import custom base variables, mixins and styles
-@import 'base';
+@import 'global';
 
 // Import the CSS for all views on the system
-@import 'views/all';
+@import 'views/layout';
+@import 'views/blocks/all';
+@import 'views/pages/all';
+@import 'views/partials/all';

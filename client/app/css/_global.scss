@@ -1,0 +1,5 @@
+$border-color: $secondary-color;
+
+div.clear {
+  @include clearfix();
+}

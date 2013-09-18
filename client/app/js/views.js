@@ -11,13 +11,13 @@
 // excluding views that don't have templates (base, page, block)
 var list = [
   'views/layout',
-  'views/header',
-  'views/footer',
-  'views/navigation',
-  'views/home',
-  'views/foo',
-  'views/fooList',
-  'views/error'
+  'views/blocks/header',
+  'views/blocks/footer',
+  'views/blocks/navigation',
+  'views/pages/home',
+  'views/pages/foo',
+  'views/pages/fooList',
+  'views/pages/error'
 ];
 
 define(['backbone'].concat(list), function (Backbone) {
@@ -25,7 +25,7 @@ define(['backbone'].concat(list), function (Backbone) {
 
   // The names of the view constructors can be inferred from the filenames
   var constructorNames = _.map(list, function (viewPath) {
-    return viewPath.replace('views/', '');
+    return viewPath.replace(/views(\/[a-z]+)?\//, '');
   });
 
   // The constructors are passed in to the define[] context, after Backbone

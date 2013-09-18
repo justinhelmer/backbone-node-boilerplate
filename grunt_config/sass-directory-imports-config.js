@@ -12,7 +12,11 @@
     return {
       files: {
         // All sass files that begin with "_' in cssPath will be imported into _all
-        src: ['<%= client.cssPath %>/views/_all.scss']
+        src: [
+          '<%= client.cssPath %>/views/blocks/_all.scss',
+          '<%= client.cssPath %>/views/pages/_all.scss',
+          '<%= client.cssPath %>/views/partials/_all.scss'
+        ]
       }
     };
   };

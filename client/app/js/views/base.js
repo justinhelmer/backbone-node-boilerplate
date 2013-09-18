@@ -134,17 +134,8 @@ define([
      */
     renderError: function (node, resp, options) {
       switch (resp.status) {
-      case 404:
-      case 406:
-        require(['views/error'], function (ErrorView) {
-          new ErrorView({
-            status: resp.statusText,
-            message: resp.responseText
-          });
-        });
-        break;
       default:
-        require(['views/error'], function (ErrorView) {
+        require(['views/blocks/error'], function (ErrorView) {
           new ErrorView({
             status: resp.statusText || 'Unknown error',
             message: resp.responseText || 'Unable to reach host'

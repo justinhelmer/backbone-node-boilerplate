@@ -19,8 +19,8 @@
     '<%= client.scriptPath %>/collections/*.js',
     '<%= client.scriptPath %>/utils/*.js',
     '<%= client.cssPath %>/*.scss',
-    '!<%= client.cssPath %>/*_all.scss',
-    '<%= client.cssPath %>/views/*.scss'
+    '<%= client.cssPath %>/views/**/*.scss',
+    '!<%= client.cssPath %>/views/**/_all.scss'
   ];
 
   module.exports = function (args) {

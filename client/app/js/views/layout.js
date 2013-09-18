@@ -7,9 +7,9 @@
 
 define([
   'views/base',
-  'views/header',
-  'views/navigation',
-  'views/footer'
+  'views/blocks/header',
+  'views/blocks/navigation',
+  'views/blocks/footer'
 ], function(BaseView, HeaderView, NavigationView, FooterView) {
   'use strict';
 

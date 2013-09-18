@@ -6,9 +6,9 @@
  */
 
 var views = [
-  'views/fooList',
-  'views/foo',
-  'views/home'
+  'views/pages/fooList',
+  'views/pages/foo',
+  'views/pages/home'
 ];
 
 define(['lodash'].concat(views), function (_) {
@@ -16,7 +16,7 @@ define(['lodash'].concat(views), function (_) {
 
   // The names of the view constructors can be inferred from the filenames
   var constructorNames = _.map(views, function (viewPath) {
-    return viewPath.replace('views/', '');
+    return viewPath.replace(/views(\/[a-z]+)?\//, '');
   });
 
   // The constructors are passed in to the define[] context, after lodash
