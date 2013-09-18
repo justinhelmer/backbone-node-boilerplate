@@ -19,7 +19,14 @@
        * Create a new foo, using the provided body data as the data object
        */
       create: function (req, res) {
-        httpHandler.request(req, res);
+        httpHandler.request(req, res, {
+          method: 'POST',
+          mock: {
+            id: 123,
+            name: req.body.name,
+            description: req.body.description,
+          }
+        });
       },
 
       /**
@@ -40,14 +47,24 @@
        * using the provided body data as the update object
        */
       update: function (req, res) {
-        httpHandler.request(req, res);
+        httpHandler.request(req, res, {
+          method: 'PUT',
+          mock: {
+            success: true
+          }
+        });
       },
 
       /**
        * Deletes a foo with the supplied id
        */
       del: function (req, res) {
-        httpHandler.request(req, res);
+        httpHandler.request(req, res, {
+          method: 'DELETE',
+          mock: {
+            success: true
+          }
+        });
       },
 
       /**
@@ -84,7 +101,9 @@
         count: function (req, res) {
           switch (req.method) {
           case 'GET' :
-            httpHandler.request(req, res);
+            httpHandler.request(req, res, {
+              mock: 156
+            });
             break;
           default:
             res.send(500, 'Bad request');
@@ -103,7 +122,12 @@
         user: function (req, res) {
           switch (req.method) {
           case 'POST' :
-            httpHandler.request(req, res);
+            httpHandler.request(req, res, {
+              method: 'POST',
+              mock: {
+                success: true
+              }
+            });
             break;
           default:
             res.send(406, 'The endpoint exists, but not for the requested method: ' + req.method);
