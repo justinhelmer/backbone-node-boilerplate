@@ -7,6 +7,8 @@ This is very much **IN PROGRESS**; I would recommend not using it on prodution b
 
 Pull requests are encouraged.
 
+Check out the [YouTube Playlist](http://www.youtube.com/playlist?list=PLipqYIK9EFaQsNijXWjRrt2PThgDm0fd_) for this project for screencasts walking you through the basics.
+
 ## Prerequisites
 1. [npm](https://npmjs.org/), the [Node.js](http://nodejs.org/) package manager.
    > Ensure it is in your PATH, and you have version 0.10.x. It may work for other versions, but this app was built originally built on:
