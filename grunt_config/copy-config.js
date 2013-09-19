@@ -10,21 +10,15 @@
 
   module.exports = function (args) {
     return {
-      dev: {
+      // devOnce is run on initial build, but not on watch:dev
+      devOnce: {
         files: [
           {
             // copy all scripts
             src:  ['**'],
-            dest: '<%= buildPaths.dev %>/js',
+            dest: '<%= buildPaths.dev %>/js/libs',
             expand: true,
-            cwd: '<%= client.scriptPath %>'
-          },
-          {
-            // copy index.html
-            src:  ['*.html'],
-            dest: '<%= buildPaths.dev %>',
-            expand: true,
-            cwd: '<%= client.rootPath %>'
+            cwd: '<%= client.scriptPath %>/libs'
           },
           {
             // copy images
@@ -33,6 +27,33 @@
             expand: true,
             cwd: '<%= client.imgPath %>'
           },
+          {
+            // copy index.html
+            src:  ['*.html'],
+            dest: '<%= buildPaths.dev %>',
+            expand: true,
+            cwd: '<%= client.rootPath %>'
+          }
+        ],
+      },
+
+      // devWatch is run on every watch:dev trigger
+      devWatch: {
+        files: [
+          {
+            // copy all scripts
+            src:  [
+              'collections/**/*.js',
+              'models/**/*.js',
+              'utils/**/*.js',
+              'views/**/*.js',
+              '*.js',
+              '!_views.js',
+            ],
+            dest: '<%= buildPaths.dev %>/js',
+            expand: true,
+            cwd: '<%= client.scriptPath %>'
+          }
         ],
       }
     };

@@ -54,6 +54,7 @@
 
     // Register custom dev build task
     grunt.registerTask('build:dev', 'Run dev build process and launch node server', [
+      'copy:devOnce',
       'prepareBuild:dev',
       'concurrent:dev'
     ]);
@@ -74,8 +75,8 @@
     grunt.registerTask('prepareBuild:dev', 'Run dev build process', [
       'jshint:dev',
       'sass-directory-imports',
-      'handlebars:dist', // App currently doesn't work unless templates are already compiled.
-      'copy:dev',
+      'handlebars:dist',
+      'copy:devWatch',
       'generate-views-list',
       'includes',
       'compass:dev',
