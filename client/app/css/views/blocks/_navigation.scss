@@ -4,7 +4,7 @@ $navigation-background-color: #fdfdfd;
   background-color: $navigation-background-color;
   border-right: 1px solid $border-color;
 
-  #navigation {
+  .navigation {
     padding: ($column-gutter / 2) emCalc(10) 0 emCalc(10);
   }
 }
