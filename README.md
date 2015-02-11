@@ -1,24 +1,23 @@
-# vanguard
+# backbone-node-boilerplate
 > Backbone framework with node server
 
 ## Getting Started
 
-There are two options to get started with this web app:
-
-1. Install all dependencies, build, and launch all in one step:
-  > Simply go to the root of the project, where `onestep.sh` is located. Then run:
-
-  ```shell
-  $> chmod +x onestep.sh && ./onestep.sh
-  ```
-
-2. Run setup script, which will not build / launch the app:
+1. Run setup script:
 
   ```shell
   $> chmod +x setup.sh && ./setup.sh
   ```
 
   > This will install the necessary requirements on your system. However, note that with this method, you will have to [build](#building-the-web-app) as a separate step.
+
+2. Build & launch the web app
+
+  ```shell
+  $> grunt --browser
+  ```
+
+  > **tip:** run any grunt task with the `--browser` flag to open the web app in a browser window
 
 ## Building the web app
 
@@ -30,11 +29,11 @@ The default grunt task is:
 $> grunt
 ```
 
-Normally, this will first run `build:dist`, then run `build:dev`, where `dev` and `dist` are build modes. However, at this time, only `dev` build is enabled, so `grunt` is an alias for `grunt build:dev`
+This will run `grunt build:dev`, where `dev` is the build mode build modes.
 
 The two build modes, `dev` and `dist`, can be differentiated as followed:
 
-- `dev` is faster, and will automatically launch a local web server and node server to make API requests.
+- `dev` is faster, and will automatically launch a local web server and node server to make API requests. It also launches additional dev tools (see below).
 
 ```shell
 
@@ -50,18 +49,17 @@ $> grunt build:dist
 
 ```
 
-
-**tip:** run any grunt task with the `--browser` flag to open the web app in a browser window
-
 ## Launching the web app
 
-The `build:dev` grunt task additionally triggers `concurrent:dev`, which launches a local web server on port 9001, a local node server on port 3000, a [LiveReload](http://livereload.com/) server on port 35729, and a [Node Inspector](https://github.com/node-inspector/node-inspector) server on port 5858, with web access (Chrome) on port 9001.
+The `build:dev` grunt task additionally triggers `concurrent:dev`, which launches a local web server on port 9001, a local node server on port 3000, a [LiveReload](http://livereload.com/) server on port 35729, and a [Node Inspector](https://github.com/node-inspector/node-inspector) server on port 5858, with web access (Chrome) on port 8080.
 
-When the local servers are running, open a web browser and visit [http://127.0.0.1:9001](http://127.0.0.1:9001) to view the web app. By default, requests to the node server are made to [http://127.0.0.1:3000](http://127.0.0.1:3000) - these configuration options can be changed at `client/app/js/config.js` and `server/config.js`. In another window or tab, open [http://127.0.0.1:9001/debug?port=5858](http://127.0.0.1:8080/debug?port=5858) to view the [Node Inspector](https://github.com/node-inspector/node-inspector) tool. This workflow will allow you to debug the client and server simultaneously, all using Chrome's Web Developer tools.
+When the local servers are running, open a web browser and visit [http://127.0.0.1:9001](http://127.0.0.1:9001) to view the web app. By default, requests to the node server are made to [http://127.0.0.1:3000](http://127.0.0.1:3000) - these configuration options can be changed at `client/app/js/config.js` and `server/config.js`. In another window or tab, open [http://127.0.0.1:8080/debug?port=5858](http://127.0.0.1:8080/debug?port=5858) to view the [Node Inspector](https://github.com/node-inspector/node-inspector) tool. This workflow will allow you to debug the client and server simultaneously, all using Chrome's Web Developer tools.
 
 Additionally, `concurrent:dev` triggers `watch:dev`, which listens for changes to development files, and will re-build application files and re-launch local livereload, node, and web servers automatically. If you have [LiveReload](http://livereload.com/) installed and running on your system, then the browser will automatically refresh to show the changes on each save.
 
 ## Standards
+- [Karma](http://karma-runner.github.io/0.12/index.html) for Behavior-Driven Development, built on top of
+- [Jasmine](http://jasmine.github.io/2.1/introduction.html) as the BDD framework & expectation library
 - [JSHint](http://www.jshint.com/) with the following options:
 
 ```js
@@ -78,16 +76,13 @@ options: {
 
 *NOTE that with `strict: true`, all custom javascript must adhere to EMCAScript 5's [Strict mode](https://developer.mozilla.org/en/JavaScript/Strict_mode).
 
-## Server Technologies
+## Technologies
 - [Node](http://nodejs.org/api/)
 - [Express](http://expressjs.com/api.html)
-
-## Client Technologies
+- [RequireJS](http://requirejs.org/)
 - [Backbone](http://backbonejs.org/)
-- [requireJS](http://requirejs.org/)
 - [jQuery](http://jquery.com/)
 - [Lo-Dash](http://lodash.com/)
 - [Handlebars](http://handlebarsjs.com/)
 - [Sass](http://sass-lang.com/)
 - [Foundation](http://foundation.zurb.com/docs/)
-- [JSHint](http://www.jshint.com/)
