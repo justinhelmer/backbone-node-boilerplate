@@ -11,7 +11,15 @@
 
   > This will install the necessary requirements on your system. However, note that with this method, you will have to [build](#building-the-web-app) as a separate step.
 
-2. Build & launch the web app
+2. Set up environment variables
+
+  ```shell
+  $> source .profile
+  ```
+
+  > **tip:** add this line to your `.bash_profile` to automatically set up your shell environment
+
+3. Build & launch the web app
 
   ```shell
   $> grunt --browser
@@ -51,11 +59,11 @@ $> grunt build:dist
 
 ## Launching the web app
 
-The `build:dev` grunt task additionally triggers `concurrent:dev`, which launches a local web server on port 9001, a local node server on port 3000, a [LiveReload](http://livereload.com/) server on port 35729, and a [Node Inspector](https://github.com/node-inspector/node-inspector) server on port 5858, with web access (Chrome) on port 8080.
+The `build:dev` grunt task additionally triggers `concurrent:dev`, which launches a local node server on port 9001 (by default), and a [LiveReload](http://livereload.com/) server on port 35729 (by default).
 
-When the local servers are running, open a web browser and visit [http://127.0.0.1:9001](http://127.0.0.1:9001) to view the web app. By default, requests to the node server are made to [http://127.0.0.1:3000](http://127.0.0.1:3000) - these configuration options can be changed at `client/app/js/config.js` and `server/config.js`. In another window or tab, open [http://127.0.0.1:8080/debug?port=5858](http://127.0.0.1:8080/debug?port=5858) to view the [Node Inspector](https://github.com/node-inspector/node-inspector) tool. This workflow will allow you to debug the client and server simultaneously, all using Chrome's Web Developer tools.
+While the node server is running, open a web browser and visit [http://127.0.0.1:9001](http://127.0.0.1:9001) to view the web app.
 
-Additionally, `concurrent:dev` triggers `watch:dev`, which listens for changes to development files, and will re-build application files and re-launch local livereload, node, and web servers automatically. If you have [LiveReload](http://livereload.com/) installed and running on your system, then the browser will automatically refresh to show the changes on each save.
+Additionally, `concurrent:dev` triggers `watch:dev`, which listens for changes to development files, and will re-build application files and re-launch the local Node & LiveReload servers automatically. If you have [LiveReload](http://livereload.com/) installed and running on your system, then the browser will automatically refresh to show the changes on each save.
 
 ## Standards
 - [Karma](http://karma-runner.github.io/0.12/index.html) for Behavior-Driven Development, built on top of
