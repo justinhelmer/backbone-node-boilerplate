@@ -1,8 +1,6 @@
 /**
  * @file home.js
- * Set up view for home page
- *
- * @author Justin Helmer 9/7/2013
+ * Display the home page
  */
 
 define([
@@ -10,7 +8,9 @@ define([
 ], function(PageView) {
   'use strict';
 
-  var HomeView = PageView.extend({});
+  var HomeView = PageView.extend({
+    template: 'home'
+  });
 
   return HomeView;
 });

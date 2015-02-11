@@ -1,8 +1,6 @@
 /**
  * @file config.js
  * Holds the global configuration options used by the local grunt instance
- *
- * @author Justin Helmer 8/10/2013
  */
 
 (function () {
@@ -15,12 +13,11 @@
   module.exports = {
     client: {
       rootPath      : appPath,
-      imgPath       : appPath + '/imgs',
+      imgPath       : appPath + '/images',
       cssPath       : appPath + '/css',
       scriptPath    : appPath + '/js',
-      libraryPath   : appPath + '/js/libs',
-      templatePaths :[appPath + '/templates/*.html',
-                      appPath + '/templates/**/*.html']
+      libraryPath   : './node_modules',
+      templatesPath : appPath + '/templates'
     },
     server: {
       rootPath      : serverPath

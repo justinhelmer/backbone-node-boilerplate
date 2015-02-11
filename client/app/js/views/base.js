@@ -1,15 +1,12 @@
 /**
  * @file base.js
  * Set up base view for other views to extend
- *
- * @author Justin Helmer 8/5/2013
  */
 
 define([
   'backbone',
-  'lodash',
-  'jst'
-], function(Backbone, _, JST) {
+  'templates'
+], function(Backbone, JST) {
   'use strict';
 
   var BaseView = Backbone.View.extend({
@@ -18,8 +15,22 @@ define([
      *
      * Children SHOULD NOT override this method
      */
-    initialize: function () {
-      this.init().postInitialize();
+    initialize: function(data) {
+      this._configure(data);
+      this.subViews = {};
+      this.init.apply(this, arguments).postInitialize();
+    },
+
+    /**
+     * Performs the initial configuration of a View with a set of options.
+     * Derived from Backbone 1.0.0 source code
+     */
+    _configure: function(data) {
+      var options = _.result(data, 'options') || {};
+      if (this.options) {
+        options = _.extend({}, _.result(this, 'options'), options);
+      }
+      this.options = options;
     },
 
     /**
@@ -29,7 +40,7 @@ define([
      *
      * @return this for chaining
      */
-    init: function () {
+    init: function() {
       return this;
     },
 
@@ -61,10 +72,12 @@ define([
         this.nodeType = nodeType;
 
         if (node.url) {
-          // This model/collection has an external data source
-          // Attach data ready listener and error handler
+          /**
+           * This model/collection has an external data source
+           * Attach data ready listener and error handler
+           */
           this.listenTo(node, 'sync', this.render);
-          //this.listenTo(node, 'error', this.renderError);
+          this.listenTo(node, 'error', this.renderError);
 
           // Attempt to retreive data from the external data source
           node.fetch();
@@ -85,8 +98,8 @@ define([
      *
      * @return this for chaining.
      */
-    render: function () {
-      this.renderTemplate().postRender();
+    render: function(entity, resp, options) {
+      this.renderTemplate(entity, resp, options).postRender();
       return this;
     },
 
@@ -102,10 +115,8 @@ define([
 
       switch (this.nodeType) {
       case 'model':
-        templateData = this.model;
-        break;
       case 'collection':
-        templateData = this.collection.models;
+        templateData = this[this.nodeType];
         break;
       default:
         templateData = templateData || {};
@@ -127,17 +138,10 @@ define([
      * @return this for chaining.
      */
     renderError: function (node, resp, options) {
-      switch (resp.status) {
-      default:
-        require(['views/pages/error'], function (ErrorView) {
-          new ErrorView({
-            status: resp.statusText || 'Unknown error',
-            message: resp.responseText || 'Unable to reach host'
-          });
-        });
-        break;
-      }
+      var status = resp.statusText || 'Unknown error';
+      var message = resp.responseText || 'Unable to reach host';
 
+      this.$el.html('<h3>Unhandled error: ' + status + '</h3><pre>' + message + '</pre>');
       return this;
     },
 
@@ -165,24 +169,10 @@ define([
      * Set the name of the template for handlebars rendering.
      * Can be a string or a function that returns a string.
      *
-     * Children CAN override this method
+     * Children SHOULD override this method
      */
     template: function () {
-      var _view = this;
-
-      var _viewName;
-      // Assume a template name that matches the name of the view.
-      // To get the name of the view, search through view constructors
-      // that have templates for a view that matches the instanceof property
-      var found = _.find(Backbone.viewConstructors, function (View, viewName) {
-        if (_view instanceof View) {
-          _viewName = viewName;
-          return true;
-        }
-        return false;
-      });
-
-      return _viewName;
+      throw new Error('Missing view.template');
     }
   });
 

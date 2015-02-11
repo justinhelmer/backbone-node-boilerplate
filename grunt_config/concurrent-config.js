@@ -2,7 +2,7 @@
  * @file nodemon-config.js
  * Holds the configuration options for the grunt-nodemon plugin
  *
- * @author Justin Helmer 8/10/2013
+ * @author Justin Helmer 10/18/2014
  */
 
 (function () {
@@ -10,10 +10,10 @@
 
   module.exports = function (args) {
     var allTasks = {
-      dev: ['nodemon:dev', 'node-inspector:dev', 'connect:dev', 'watch:dev'],
-      dist: ['nodemon:dist', 'connect:dist', 'watch:dist'],
-      devBrowser: ['nodemon:dev', 'node-inspector:dev', 'connect:dev', 'open', 'watch:dev'],
-      distBrowser: ['nodemon:dist', 'connect:dist', 'open', 'watch:dist']
+      dev: ['nodemon:dev', 'watch:dev'],
+      dist: ['nodemon:dist', 'watch:dist'],
+      devBrowser: ['nodemon:dev', 'open', 'watch:dev'],
+      distBrowser: ['nodemon:dist', 'open', 'watch:dist']
     };
 
     var tasks = {

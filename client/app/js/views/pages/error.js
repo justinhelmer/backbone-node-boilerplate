@@ -1,8 +1,6 @@
 /**
  * @file error.js
- * Display an error message. Can be inherited by specific error codes
- *
- * @author Justin Helmer 9/8/2013
+ * Display the error page
  */
 
 define([
@@ -10,7 +8,9 @@ define([
 ], function(PageView) {
   'use strict';
 
-  var ErrorView = PageView.extend({});
+  var ErrorView = PageView.extend({
+    template: 'error'
+  });
 
   return ErrorView;
 });

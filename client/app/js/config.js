@@ -1,9 +1,17 @@
-define({
-  api: {
-    url: 'http://127.0.0.1:3000/',
-    vendorJSON: 'application/vnd.jhelmer.backbone-node-boilerplate+json',
+/**
+ * @file config.js
+ * Place global configuration variables here.
+ */
 
-    // Use version 1 of the API
-    version: '1.0'
-  }
+define([
+], function() {
+  'use strict';
+
+  return {
+    api: {
+      version: 1.0,
+      url: '/api/',
+      timeout: 10000 // ms
+    }
+  };
 });

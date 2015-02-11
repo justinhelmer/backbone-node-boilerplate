@@ -2,7 +2,7 @@
  * @file jshint-config.js
  * Holds the configuration options for the grunt-contrib-jshint plugin
  *
- * @author Justin Helmer 8/5/2013
+ * @author Justin Helmer 10/18/2014
  */
 
 (function () {
@@ -24,14 +24,15 @@
           'Gruntfile.js',
           'grunt_config/*',
           '<%= client.scriptPath %>/*.js',
-          '!<%= client.scriptPath %>/templates.js',
+          '<%= client.scriptPath %>/router/*.js',
+          '<%= client.scriptPath %>/router/**/*.js',
           '<%= client.scriptPath %>/models/*.js',
           '<%= client.scriptPath %>/views/*.js',
           '<%= client.scriptPath %>/views/**/*.js',
           '<%= client.scriptPath %>/collections/*.js',
           '<%= client.scriptPath %>/utils/*.js',
-          '<%= server.rootPath %>/*.js',
-          '<%= server.rootPath %>/resources/**/*.js',
+          '<%= client.scriptPath %>/utils/**/*.js',
+          '<%= server.rootPath %>/*.js'
         ]
       }
     };

@@ -1,36 +1,67 @@
 /**
  * @file base.js
  * Backbone collection for other collections to extend
- *
- * @author Justin Helmer 9/18/2013
  */
 
 define([
+  'underscore',
   'backbone',
-  'config',
-  'views/base'
-], function(Backbone, config, BaseView) {
+  'config'
+], function(_, Backbone, config) {
   'use strict';
 
   var BaseCollection = Backbone.Collection.extend({
-    timeout: 10000,
-
-    // Each collection that extends BaseCollection must set the endpoint path
-    endpoint: '',
-
-    url: function () {
-      return config.api.url + this.endpoint;
+    initialize: function(models, data) {
+      _.extend(this, data || {});
     },
 
-    fetch: function () {
+    timeout: function() {
+      return config.api.timeout;
+    },
+
+    // Each collection that extends BaseCollection must set the endpoint path
+    endpoint: function() {
+      throw new Error('Missing collection.endpoint');
+    },
+
+    url: function() {
+      return config.api.url + _.result(this, 'endpoint') + this.prepareQuery();
+    },
+
+    prepareQuery: function() {
+      var query = '';
+
+      if (!_.isEmpty(this.params)) {
+        query += '?' + $.param(this.params);
+      }
+
+      return query;
+    },
+
+    fetch: function() {
       Backbone.Collection.prototype.fetch.call(this, {
         timeout: this.timeout,
-        error: this.error
+        success: this.success
       });
     },
 
-    error: function (collection, resp, options) {
-      BaseView.prototype.renderError(collection, resp, options);
+    success: function(collection, resp, options) {
+      // If the "current" property is passed, update it to reference the model
+      if (collection.current && (_.isString(collection.current) || _.isNumber(collection.current))) {
+        collection.setCurrent.call(collection, collection.current, false);
+      }
+    },
+
+    setCurrent: function(current, trigger) {
+      current = this.get(current);
+
+      if (current) {
+        this.current = current;
+
+        if (trigger !== false) {
+          this.trigger('change:current');
+        }
+      }
     }
   });
 

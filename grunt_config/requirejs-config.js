@@ -2,7 +2,7 @@
  * @file requirejs-config.js
  * Holds the configuration options for the grunt-contrib-requirejs plugin
  *
- * @author Justin Helmer 8/5/2013
+ * @author Justin Helmer 10/18/2014
  */
 
 (function () {

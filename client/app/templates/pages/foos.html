@@ -1,0 +1,9 @@
+<article id="foos">
+  <h1>This is a list of foos.</h1>
+
+  <ul>
+    {{#each models}}
+      <li><a href="/foos/{{attributes.id}}">{{> single-foo}}</a></li>
+    {{/each}}
+  </ul>
+</article>

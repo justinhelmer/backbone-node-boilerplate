@@ -1,43 +1,28 @@
-/**
- * @file base.js
- * Backbone model to be extended by all other models
- *
- * @author Justin Helmer 9/7/2013
- */
-
 define([
+  'underscore',
   'backbone',
-  'config',
-  'views/base'
-], function(Backbone, config, BaseView) {
+  'config'
+], function(_, Backbone, config) {
   'use strict';
 
   var BaseModel = Backbone.Model.extend({
-    timeout: 10000,
+    timeout: function() {
+      return config.api.timeout;
+    },
 
     // Each collection that extends BaseCollection must set the endpoint path
-    endpoint: '',
-
-    urlRoot: function () {
-      return config.api.url + this.endpoint;
+    endpoint: function() {
+      throw new Error('Missing model.endpoint');
     },
 
-    fetch: function (options) {
-      Backbone.Model.prototype.fetch.call(this, {
-        timeout: this.timeout,
-        error: this.error
-      });
+    urlRoot: function() {
+      return config.api.url + _.result(this, 'endpoint');
     },
 
-    save: function (key, val, options) {
-      Backbone.Model.prototype.save.call(this, {}, {
-        timeout: this.timeout,
-        error: this.error
-      });
-    },
-
-    error: function (model, resp, options) {
-      BaseView.prototype.renderError(model, resp, options);
+    fetch: function(options) {
+      Backbone.Model.prototype.fetch.call(this, _.defaults(options, {
+        timeout: _.result(this, 'timeout')
+      }));
     }
   });
 

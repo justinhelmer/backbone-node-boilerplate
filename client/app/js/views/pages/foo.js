@@ -1,19 +1,19 @@
 /**
  * @file foo.js
- * Set up view for foo details
- *
- * @author Justin Helmer 8/4/2013
+ * Display the foo page
  */
 
 define([
-  'models/foo',
   'views/page',
-], function(FooModel, PageView) {
+  'models/foo'
+], function(PageView, FooModel) {
   'use strict';
 
   var FooView = PageView.extend({
+    template: 'foo',
+
     init: function () {
-      this.model = new FooModel({id: this.options[0]});
+      this.model = new FooModel({ id: this.options.id });
       return this;
     }
   });

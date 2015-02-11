@@ -11,7 +11,7 @@
     grunt.initConfig(config);
 
     // Include lodash (underscore) for their nice utility functions
-    var _ = require(config.client.libraryPath + '/lodash/lodash');
+    var _ = require(config.client.libraryPath + '/lodash/dist/lodash');
 
     _.each(tasks, function (task) {
       // Establish config for this task. Each task config is in its own file
@@ -20,27 +20,32 @@
     });
 
     // Load grunt npm modules
-    _.each(require('matchdep').filterDev('grunt-*'), function (moduleName) {
+    _.each(require('matchdep').filterAll('grunt-*'), function (moduleName) {
+      var configName;
+
       // Load the npm grunt task
       grunt.loadNpmTasks(moduleName);
 
-      if (moduleName !== 'grunt-connect-proxy') {
+      if (moduleName === 'grunt-requirejs-config') {
+        configName = 'requirejsconfig';
+      }
+      else {
         // Assume the config name is everything after the string `grunt-` or `grunt-contrib`.
         // e.g. `grunt-contrib-requirejs` --> `requirejs`, `grunt-node-inspector` --> `node-inspector`
         // NOTE that this may not always be the case
-        var configName = moduleName.replace('grunt-contrib-', '').replace('grunt-', '');
-
-        // Require the appropriate configuration for this npm task
-        var init = require(config.configPath + '/' + configName + '-config');
-        grunt.config(configName, init(args));
+        configName = moduleName.replace('grunt-contrib-', '').replace('grunt-', '');
       }
+
+      // Require the appropriate configuration for this npm task
+      var init = require(config.configPath + '/' + configName + '-config');
+      grunt.config(configName, init(args));
     });
 
     // Prepare an object of external (non-npm) tasks
     var tasks = {
       // module => config
       'sass-directory-imports' : 'sass-directory-imports',
-      'generate-views-list' : 'generate-views-list'
+      'generate-route-handlers' : 'generate-route-handlers'
     };
 
     // Load the non-npm grunt tasks
@@ -54,7 +59,6 @@
 
     // Register custom dev build task
     grunt.registerTask('build:dev', 'Run dev build process and launch node server', [
-      'copy:devOnce',
       'prepareBuild:dev',
       'concurrent:dev'
     ]);
@@ -64,10 +68,10 @@
       'clean:buildPrepare',
       'sass-directory-imports',
       'handlebars:dist',
+      'requirejsconfig:dev',
       'requirejs:dist',
-      'generate-views-list',
-      'includes',
-      'compass:dist',
+      'generate-route-handlers',
+      'sass:dev',
       'clean:dist'
     ]);
 
@@ -75,12 +79,11 @@
     grunt.registerTask('prepareBuild:dev', 'Run dev build process', [
       'jshint:dev',
       'sass-directory-imports',
+      'copy:dev',
       'handlebars:dist',
-      'copy:devWatch',
-      'generate-views-list',
-      'includes',
-      'compass:dev',
-      'clean:dev'
+      'generate-route-handlers',
+      'sass:dev',
+      'requirejsconfig:dev'
     ]);
 
     // Run concurrent:dev and launch browser
@@ -93,15 +96,24 @@
       'concurrent:distBrowser'
     ]);
 
-    // Register build task that will run both dev and dist builds
     grunt.registerTask('build', 'build dev and dist', [
-      'build:dist', // running 'dist' first, since 'dev' has a blocking watch task
+      // disabling dist for now, as it is not set up
+      //'build:dist', // running 'dist' first, since 'dev' has a blocking watch task
       'build:dev'
+    ]);
+
+    grunt.registerTask('test', 'run all tests', [
+      'prepareBuild:dev',
+      'shell:spec'
     ]);
 
     // Register default task for when no task is supplied
     grunt.registerTask('default', 'run grunt build', [
       'build'
+    ]);
+
+    grunt.registerTask('heroku:deployment', 'Run dev build process for buildpack', [
+      'prepareBuild:dev'
     ]);
   };
 }());

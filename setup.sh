@@ -1,24 +1,37 @@
-SUDO="yes"
+#!/bin/bash
 
-case "$OSTYPE" in
-  msys*)    SUDO="no" ;;
-  solaris*) SUDO="yes" ;;
-  darwin*)  SUDO="yes" ;;
-  linux*)   SUDO="yes" ;;
-  bsd*)     SUDO="yes" ;;
-  *)        SUDO="yes" ;;
-esac
+OS=$(uname -s)
+clear
 
-if [[ "$SUDO" == "yes" ]]; then
-  sudo npm install -g grunt-cli
-  sudo npm install -g bower
-  sudo npm install -g requirejs
-  sudo npm install -g handlebars
-  sudo gem install compass
-elif [[ "$SUDO" == "no" ]]; then
-  npm install -g grunt-cli
-  npm install -g bower
-  npm install -g requirejs
-  npm install -g handlebars
-  gem install compass
+# mac
+if [ $OS = "Darwin" ]; then
+
+  if $(! type -P brew &>/dev/null) ; then
+    ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+    brew doctor
+  else
+    brew update
+  fi
+
+  if $(! type -P npm &>/dev/null) ; then
+    brew install node
+  fi
+
+  if $(! type -P grunt &>/dev/null) ; then
+    npm install -g grunt-cli
+  else
+    npm update -g grunt-cli
+  fi
+
+  gem install sass
+  npm install
+  npm update
+
+  source .profile
+
+  echo "-----------------------------------------------------------------------"
+  echo "Install complete."
+  echo "You can now run 'grunt --browser' to build & launch the project"
+  echo "-----------------------------------------------------------------------"
+  echo ""
 fi

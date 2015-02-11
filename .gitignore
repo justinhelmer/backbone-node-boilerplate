@@ -1,4 +1,15 @@
-client/build/
+.DS_Store
+.sass-cache
+.grunt
+.project
+.settings
+.metadata
+.idea
 
 npm-debug.log
-*.sass-cache
+phantomjsdriver.log
+selenium-server-standalone-*.jar
+
+/node_modules
+/client/build
+/spec/report

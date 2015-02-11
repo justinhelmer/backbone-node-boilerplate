@@ -1,8 +1,6 @@
 /**
  * @file page.js
  * Set up page view for other views to extend
- *
- * @author Justin Helmer 8/4/2013
  */
 
 define([

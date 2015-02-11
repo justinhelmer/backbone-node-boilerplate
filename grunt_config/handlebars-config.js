@@ -2,21 +2,20 @@
  * @file handlebars-config.js
  * Holds the configuration options for the grunt-contrib-handlebars plugin
  *
- * @author Justin Helmer 8/5/2013
+ * @author Justin Helmer 10/18/2014
  */
 
 (function () {
   'use strict';
 
   var config = require('../grunt-config');
-  var StringFunctions = require('.' + config.client.scriptPath + '/utils/stringFunctions');
 
   module.exports = function (args) {
     return {
       options: {
         amd: true,
+        namespace: 'JST',
         partialsUseNamespace: true,
-
         partialRegex: /.*/,
         partialsPathRegex: /\/partials\//,
 
@@ -30,7 +29,10 @@
         }
       },
       dist: {
-        src: '<%= client.templatePaths %>',
+        src: [
+          '<%= client.templatesPath %>/*.html',
+          '<%= client.templatesPath %>/**/*.html'
+        ],
         dest: '<%= buildPaths.dev %>/js/templates.js'
       }
     };
