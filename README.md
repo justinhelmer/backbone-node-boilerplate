@@ -1,6 +1,10 @@
 # backbone-node-boilerplate
 > Backbone framework with node server
 
+## WARNING
+
+**This project is not currently being maintainted**
+
 ## Getting Started
 
 1. Run setup script:
